@@ -1,0 +1,84 @@
+-- First Join --
+
+Lemonade Stand - Open button - confetti - 6 gold start
+Blank unlock button - 5 gold
+(Lemonade - makes 6 gold - cost 3 gold upgrade - 5 seconds)
+
+Blue upgrade arrow only thing to click - tells to get another customer, hire cashier etc. - 13 and 30 gold
+Clicks on wooden crate to unlock cashier
+New place button appears and boost button
+Tells you to renovate asap
+
+Food stand unlocked
+
+Food truck unlocked: get 1 box - guide user to box - guide user to character menu - equip new item
+Guide user to popular dish skill
+Starter pack
+
+When in café, unlock vault: first free unlock, first upgrade free
+
+-- Purchasables --
+
+GamePasses:
+  x2 profit forever: £4.99
+  x2 Speed Boost forever: £4.99
+  x2 Tips: £4.99
+  Tips Collected Automatically: £9.99
+
+
+Cash & Boosts:
+  30min Profit: 30 gems
+  x2 Profit Boost 20min: 45 gems
+  x5 Profit Boost 5minL 70 gems
+
+
+Special Offers:
+  1 event box ; 250 gems: £3.79
+  5 event box ; 10 small box: £18.99
+  2 small box ; 100 gems: £1.49
+  2 big box ; 5 small box ; 600 gems: £9.79
+  3 pet box ; 10 small box ; 300 treats: £18.99
+
+Adventure Keys:
+  5: £1.09
+  20: £4.19
+  60: £10.99
+
+Gems:
+  100: £1.49
+  255: £3.29
+  520: £7.59
+  1100: £14.99
+  2700: £37.99
+  5500: £75.99
+
+
+-- Box Details --
+
+Small Box: 40 gems
+  - 2 items
+  - common 60%
+  - rare 12%
+  - epic 3%
+  - common egg 1%
+  - rare egg 0.25%
+  - 6-15 food 24%
+
+Big Box: 200 gems
+  - 6 items
+  - common 48%
+  - rare 30%
+  - epic 15%
+  - legendary blueprint 5%
+  - epic egg 2%
+  - legendary egg 0.25%
+
+Pet Box: 500 gems
+  - 3 items
+  - common egg 59%
+  - rare egg 28%
+  - epic egg 11%
+  - legendary egg 1.4%
+  - ultimate egg 0.5%
+  - guaranteed 150 pet food
+
