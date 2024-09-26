@@ -32,6 +32,7 @@ function Module.Start()
 
     local StarterGui = game:GetService('StarterGui')
     StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, false)
+    StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, true)
 end
 
 function Module.Init(otherSystems)

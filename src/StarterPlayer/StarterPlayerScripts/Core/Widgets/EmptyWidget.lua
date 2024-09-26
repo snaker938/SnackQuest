@@ -1,9 +1,13 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 local ReplicatedModules = require(ReplicatedStorage:WaitForChild('Modules'))
 local Trove = ReplicatedModules.Classes.Trove
 
-local BridgeNet2 = require(ReplicatedStorage.Packages.BridgeNet2)
-local addDraken = BridgeNet2.ClientBridge("addDraken")
+local Warp = ReplicatedModules.Classes.Warp
+
+local Interface = LocalPlayer:WaitForChild('PlayerGui')
 
 local SystemsContainer = {}
 local WidgetControllerModule = {}
@@ -36,9 +40,11 @@ function Module.CloseWidget()
 end
 
 function Module.Start()
-	local AlwaysActiveBtn = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("AlwaysActive").TestBtn
-	AlwaysActiveBtn.Activated:Connect(function()
-		addDraken:InvokeServerAsync(10000)
+	local TestBtn = Interface:WaitForChild("ScreenGui"):WaitForChild("TestBtn")
+	local TestRemote = Warp.Client("AddCoins");
+
+	TestBtn.MouseButton1Click:Connect(function()
+		TestRemote:Fire(true, 10)
 	end)
 end
 

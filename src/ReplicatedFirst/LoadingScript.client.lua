@@ -23,9 +23,9 @@ local assets = game:GetDescendants()
 -- cloneGui.Parent = Players.LocalPlayer.PlayerGui
 
 local camera = workspace.CurrentCamera
-local cameraPart = workspace:WaitForChild("CameraPart")
-camera.CameraType = Enum.CameraType.Scriptable
-camera.CFrame = cameraPart.CFrame
+-- local cameraPart = workspace:WaitForChild("CameraPart")
+-- camera.CameraType = Enum.CameraType.Scriptable
+-- camera.CFrame = cameraPart.CFrame
 
 
 -- CONSTANTS --
