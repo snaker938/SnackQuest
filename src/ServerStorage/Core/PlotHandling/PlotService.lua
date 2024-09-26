@@ -14,7 +14,7 @@ local Module = {}
 
 -- Plots table where each plot is either assigned a player or is false (unoccupied)
 Module.Plots = {
-    true, -- Plot 1
+    false, -- Plot 1
     false, -- Plot 2
     false, -- Plot 3
     false, -- Plot 4

@@ -20,9 +20,10 @@ local function cacheParent( _, Parent )
 
 	-- Require Modules
 	for _, ModuleScript in ipairs( Parent:GetChildren() ) do
-		if ModuleScript:IsA('ModuleScript') then
-			Cache[ModuleScript.Name] = require(ModuleScript)
+		if ModuleScript.Name == "ReplicaController" or ModuleScript.Name == "ReplicaService" then
+			continue
 		end
+		Cache[ModuleScript.Name] = require(ModuleScript)
 	end
 
 
