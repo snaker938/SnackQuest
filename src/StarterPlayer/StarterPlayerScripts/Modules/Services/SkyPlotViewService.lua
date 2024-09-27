@@ -10,12 +10,13 @@ local function setCameraToPart(player, part)
     camera.CFrame = part.CFrame -- Set the camera position and orientation to match the part's CFrame
 end
 
+
 -- Helper function to reset the camera to the player's default view
 local function resetCamera(player)
     local camera = workspace.CurrentCamera
-    camera.CameraType = Enum.CameraType.Custom -- Reset the camera back to default
-    camera.CFrame = player.Character.HumanoidRootPart.CFrame -- Return to player's current position
+    camera.CameraType = Enum.CameraType.Custom -- Set camera back to player-controlled
 end
+
 
 -- Shows the specified plot from the sky
 function Module.ShowPlotFromSky(plotNumber, player)
@@ -32,12 +33,12 @@ function Module.ShowPlotFromSky(plotNumber, player)
 end
 
 -- Stops showing the plot from the sky and teleports the player back to their plot sign
-function Module.StopShowingPlotFromSky(plotNumber, player)
+function Module.StopShowingPlotFromSky(plotNumber, player : Player)
     local PlotSigns = workspace:WaitForChild("PlotSigns"):GetDescendants()
     for _, sign in ipairs(PlotSigns) do
         if sign.Name == "TycoonSign" .. plotNumber then
             -- Teleport the player back to their plot's sign
-            player.Character:SetPrimaryPartCFrame(sign["Become Owner"].Head.CFrame + Vector3.new(15, 0, -10))
+            player.Character.HumanoidRootPart.CFrame = sign["Become Owner"].Head.CFrame + Vector3.new(15, 0, -10)
             resetCamera(player) -- Reset camera back to player's view
             print(player.Name .. " teleported back to plot " .. plotNumber)
             return
