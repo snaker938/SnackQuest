@@ -46,6 +46,8 @@ function Module.Start()
 	TestBtn.MouseButton1Click:Connect(function()
 		TestRemote:Fire(true, 10)
 	end)
+
+
 end
 
 function Module.Init(ParentController, otherSystems)

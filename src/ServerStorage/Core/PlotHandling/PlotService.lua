@@ -23,13 +23,13 @@ Module.Plots = {
 
 -- Find the first available plot for the player and assign them to it, returning the plot index (1-based array)
 function Module.AddPersonToPlot(player: Player)
-    for plotId, plot in ipairs(Module.Plots) do
+    for plotNum, plot in ipairs(Module.Plots) do
         -- Check if the plot is available (i.e., false)
         if plot == false then
             -- Assign the player to this plot
-            Module.Plots[plotId] = player
-            -- print(player.Name .. " has been assigned to plot " .. plotId)
-            return plotId -- Return the plot index after assigning the player
+            Module.Plots[plotNum] = player
+            -- print(player.Name .. " has been assigned to plot " .. plotNum)
+            return plotNum -- Return the plot index after assigning the player
         end
     end
 
@@ -39,10 +39,10 @@ function Module.AddPersonToPlot(player: Player)
 end
 
 -- Return the plot index that a specific player is occupying, or false if they don't occupy any plot
-function Module.GetPlayerPlotId(player: Player)
-    for plotId, plot in ipairs(Module.Plots) do
+function Module.GetPlayerPlotNum(player: Player)
+    for plotNum, plot in ipairs(Module.Plots) do
         if plot == player then
-            return plotId
+            return plotNum
         end
     end
     return false -- Return false if the player is not found in any plot
@@ -50,10 +50,10 @@ end
 
 -- Remove a player from their assigned plot
 function Module.RemovePlayerFromPlot(player: Player)
-    local plotId = Module.GetPlayerPlotId(player)
-    if plotId then
-        Module.Plots[plotId] = false -- Make the plot available again (set to false)
-        print(player.Name .. " has been removed from plot " .. plotId)
+    local plotNum = Module.GetPlayerPlotNum(player)
+    if plotNum then
+        Module.Plots[plotNum] = false -- Make the plot available again (set to false)
+        print(player.Name .. " has been removed from plot " .. plotNum)
         return true
     else
         error("Player " .. player.Name .. " is not occupying any plot.")
@@ -62,23 +62,23 @@ function Module.RemovePlayerFromPlot(player: Player)
 end
 
 -- Check if a specific plot is occupied
-function Module.IsPlotOccupied(plotId: number)
-    return Module.Plots[plotId] ~= false -- Return true if the plot is occupied (not false)
+function Module.IsPlotOccupied(plotNum: number)
+    return Module.Plots[plotNum] ~= false -- Return true if the plot is occupied (not false)
 end
 
 -- Clear all players from the plots (useful for server reset)
 function Module.ClearAllPlots()
-    for plotId = 1, #Module.Plots do
-        Module.Plots[plotId] = false -- Set all plots to false (clear them)
+    for plotNum = 1, #Module.Plots do
+        Module.Plots[plotNum] = false -- Set all plots to false (clear them)
     end
     print("All plots have been cleared.")
 end
 
 -- Handles when a player joins the server
 local function playerAdded(player: Player)
-    local assignedPlotId = Module.AddPersonToPlot(player)
-    if assignedPlotId then
-        print(player.Name .. " was successfully assigned to plot " .. assignedPlotId)
+    local assignedplotNum = Module.AddPersonToPlot(player)
+    if assignedplotNum then
+        print(player.Name .. " was successfully assigned to plot " .. assignedplotNum)
     else
         player:Kick("Something went wrong while assigning you to a plot.")
     end
@@ -109,8 +109,8 @@ function Module.Start()
     local FindPlotNumberEvent = Warp.Server("FindPlotNumberEvent")
 
     FindPlotNumberEvent:Connect(function(player)
-        local assignedPlotId = Module.GetPlayerPlotId(player)
-        return assignedPlotId
+        local assignedplotNum = Module.GetPlayerPlotNum(player)
+        return assignedplotNum
     end)
 end
 

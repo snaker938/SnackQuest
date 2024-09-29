@@ -6,7 +6,7 @@ local Index = {}
 local RunService = game:GetService("RunService")
 local IsServer = RunService:IsServer()
 
-local Util = script:WaitForChild("Util")
+local Util = script.Util
 local Server = script.Server
 local Client = script.Client
 

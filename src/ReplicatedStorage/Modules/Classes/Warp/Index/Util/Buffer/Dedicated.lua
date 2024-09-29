@@ -16,7 +16,7 @@ local writef32 = buffer.writef32
 local writef64 = buffer.writef64
 local writestring = buffer.writestring
 
-local default = {
+local default: { [string]: number } = {
 	point = 0,
 	next = 0,
 	size = 128,
@@ -128,7 +128,7 @@ function DedicatedBuffer.new()
 end
 
 function DedicatedBuffer.remove(self: any)
-	self:flush()
+	table.clear(self)
 	setmetatable(self, nil)
 end
 

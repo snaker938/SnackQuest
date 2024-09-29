@@ -1,4 +1,4 @@
-local Players = game:GetService('Players')
+local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
@@ -7,14 +7,16 @@ local Trove = ReplicatedModules.Classes.Trove
 
 local LocalModules = require(LocalPlayer:WaitForChild("PlayerScripts"):WaitForChild("Modules"))
 
-local Warp = ReplicatedModules.Classes.Warp
+local SkyPlotViewService = LocalModules.Services.SkyPlotViewService
 
-local FirstJoinScreen = LocalPlayer:WaitForChild('PlayerGui'):WaitForChild("FirstJoinScreen")
+local Interface = LocalPlayer:WaitForChild('PlayerGui')
+
+local OpenRestaurantGui = Interface:WaitForChild("OpenRestaurantGui")
+
+local CityData = ReplicatedModules.Data.CityData
 
 local SystemsContainer = {}
 local WidgetControllerModule = {}
-
-local SkyPlotViewService = LocalModules.Services.SkyPlotViewService
 
 -- // Module // --
 local Module = {}
@@ -28,28 +30,8 @@ function Module.UpdateWidget()
     
 end
 
-function Module.OpenWidget()
-    if Module.Open then
-        return
-    end
-    
-    Module.Open = true
-
-    -- Open the GUI (FirstJoinScreen) for the first-time player
-    FirstJoinScreen.Enabled = true
-
-    -- Invoke the event to find the plot number
-    local FindPlotNumberEvent = Warp.Client("FindPlotNumberEvent")
-
-    -- PlotNumber could be any plot based on logic, assuming it returns a number
-    Module.PlotNumber = FindPlotNumberEvent:Invoke(2) -- Invoke with argument (example)
-
-    -- Show the aerial view of the player's plot using the PlotNumber
-    SkyPlotViewService.ShowPlotFromSky(Module.PlotNumber, Players.LocalPlayer)
-end
-
-function Module.SetupOpenButton()
-    local OpenButton = FirstJoinScreen:WaitForChild("OpenLemonadeStandFrame"):WaitForChild("OpenButton") :: TextButton
+function Module.SetupOpenButton(OpenRestaurantFrame)
+    local OpenButton = OpenRestaurantFrame:WaitForChild("OpenButton") :: TextButton
     local CameraShakeService = LocalModules.Services.CameraShakeService
 
     local timeBetween = 0
@@ -116,6 +98,33 @@ function Module.SetupOpenButton()
     OpenButton.MouseLeave:Connect(function()
         resetButton()  -- Reset everything if the user moves their mouse off the button
     end)
+
+    Module.WidgetTrove:Add(OpenRestaurantFrame)
+
+    SkyPlotViewService.ShowPlotFromSky(Module.PlotNumber, Players.LocalPlayer)
+end
+
+function Module.OpenWidget(cityNumber, restaurantNumber, plotNumber)
+    if Module.Open then
+        return
+    end
+
+    Module.PlotNumber = plotNumber
+
+    local OpenRestaurantFrame = OpenRestaurantGui:WaitForChild("OpenRestaurantFrame")
+
+    local RestaurantImageId = CityData.GetRestaurantImageId(restaurantNumber, cityNumber)
+    local RestaurantImage = OpenRestaurantFrame:WaitForChild("RestaurantImage") :: ImageLabel
+    RestaurantImage.Image = "rbxassetid://" .. RestaurantImageId
+
+    local RestaurantName = CityData.GetCurrentRestaurantName(cityNumber, restaurantNumber)
+    local RestaurantText = OpenRestaurantFrame:WaitForChild("RestaurantText") :: TextLabel
+    RestaurantText.Text = RestaurantName
+
+    Module.SetupOpenButton(OpenRestaurantFrame)
+
+    OpenRestaurantGui.Enabled = true
+    Module.Open = true
 end
 
 function Module.CloseWidget()
@@ -123,25 +132,16 @@ function Module.CloseWidget()
         return
     end
 
-    -- Hide the GUI
-    FirstJoinScreen.Enabled = false
-
     -- Stop showing the plot from the sky and teleport the player back to the plot's sign
     SkyPlotViewService.StopShowingPlotFromSky(Module.PlotNumber, Players.LocalPlayer)
-
+    
+    OpenRestaurantGui.Enabled = false
     Module.Open = false
     Module.WidgetTrove:Destroy()
 end
 
-
 function Module.Start()
-    local FirstJoinRemote = Warp.Client("FirstJoinRemote")
-
-    FirstJoinRemote:Connect(function()
-        Module.OpenWidget()
-    end)
-
-    Module.SetupOpenButton()
+    
 end
 
 function Module.Init(ParentController, otherSystems)

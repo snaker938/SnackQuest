@@ -47,6 +47,8 @@ local function cacheParent( _, Parent )
 end
 
 local function startFramework()
+	local GamePlayModule
+
 	if RunService:IsServer() then print("------------ STARTING SERVER MODULES ------------") else print("------------ STARTING CLIENT MODULES ------------") end
 	for _, cache in pairs( CacheTable ) do
 		for moduleName, preLoaded in pairs(cache) do
@@ -56,9 +58,21 @@ local function startFramework()
 			preLoaded.Started = true
 			print("Starting module: " .. moduleName)
 			preLoaded.Start()
+
+			if RunService:IsClient() and moduleName == "Game" then
+				GamePlayModule = preLoaded
+			end
 		end
 	end
 	if RunService:IsServer() then print("------------ STARTED SERVER MODULES ------------") else print("------------ STARTED CLIENT MODULES ------------") end
+
+	-- All modules have been started
+	if RunService:IsClient() then
+		print("---- ALL MODULES HAVE BEEN STARTED ----")
+		if GamePlayModule then
+			GamePlayModule.StartGameplay()
+		end
+	end
 end
 
 -- // MAIN // --

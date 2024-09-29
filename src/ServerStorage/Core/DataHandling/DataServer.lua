@@ -11,15 +11,10 @@ local ServerStorage = game:GetService('ServerStorage')
 local ServerModules = require(ServerStorage:WaitForChild("Modules"))
 local ProfileService = ServerModules.Services.ProfileService
 
-local Warp = ReplicatedModules.Classes.Warp
-
-
 local SystemsContainer = {}
 
 -- // Module // --
 local Module = {}
-
-Module.EverythingLoaded = nil
 
 Module.ProfileStoreName = string.format(`%s_data_key_store`, game.PlaceId)
 Module.ProfileStructure = {
@@ -195,6 +190,29 @@ function Module.fetch(dataSource : { Player | {Player}}, dataName : string) : {s
 	else
 		-- when i use things like this its just cause i love one liners, this just checks if the profile exists and if the data exists, if it does, it returns the data, if not, it returns nil
 		return (((Module.Profiles[dataSource] and true) and Module.Profiles[dataSource].Data[dataName].CurrentData) or nil)
+	end
+end
+
+function Module.GetAllData(dataSource : {Player | {Player}}) : {string | number | table}?
+	if not dataSource then return end
+	if not next(Module.Profiles) then
+		return false, "Data source or profiles are not available"
+	end
+
+	if typeof(dataSource) == "table" then
+		local foundData = {}
+
+		task.spawn(function()
+			for _, player in pairs(dataSource) do
+				if (((Module.Profiles[player] and true) and Module.Profiles[player].Data) or nil) then
+					foundData = Module.Profiles[player].Data
+				end
+			end
+		end)
+
+		return foundData or nil
+	else
+		return (((Module.Profiles[dataSource] and true) and Module.Profiles[dataSource].Data) or nil)
 	end
 end
 
@@ -512,7 +530,7 @@ end
 function Module.StartServer()
 	local start = os.clock()
 
-	local FirstJoinRemote = Warp.Server("FirstJoinRemote")
+	-- local FirstJoinRemote = Warp.Server("FirstJoinRemote")
 
 	local ProfileStore : ProfileStructure = ProfileService.GetProfileStore(
 		Module.ProfileStoreName :: ProfileStoreName,
@@ -569,13 +587,6 @@ function Module.StartServer()
 
 			if Module.fetch(player, "HasPlayed")[1] == false then
 				print(player.Name .. " has not played before")
-				-- Module.set(player, "HasPlayed", {true})
-
-				local Data = require(ReplicatedStorage:WaitForChild('Framework'))
-
-				WaitFor.Custom(function() return Module.EverythingLoaded end):andThen(function()
-					FirstJoinRemote:Fire(true, player, "OpenFirstJoinWidget")
-				end)
 			else
 				print(player.Name .. " has played before")
 			end
@@ -628,12 +639,6 @@ function Module.Start()
 end
 
 function Module.Init(otherSystems)
-	local EverythingLoadedRemote = Warp.Server("EverythingLoadedRemote")
-
-	EverythingLoadedRemote:Connect(function(player)
-		Module.EverythingLoaded = true
-	end)
-
 	SystemsContainer = otherSystems
 end
 

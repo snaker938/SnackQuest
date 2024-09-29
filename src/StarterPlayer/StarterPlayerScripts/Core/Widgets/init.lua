@@ -71,13 +71,6 @@ function Module.Start()
 	for _, WidgetModule in pairs(WidgetsCache) do
 		WidgetModule.CloseWidget()
 	end
-	
-	local ReplicatedStorage = game:GetService('ReplicatedStorage')
-	local ReplicatedModules = require(ReplicatedStorage:WaitForChild('Modules'))
-	local Warp = ReplicatedModules.Classes.Warp
-
-	local EverythingLoadedRemote = Warp.Client("EverythingLoadedRemote")
-	EverythingLoadedRemote:Fire()
 end
 
 function Module.Init(otherSystems)
