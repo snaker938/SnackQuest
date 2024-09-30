@@ -52,6 +52,9 @@ end
 function Module.RemovePlayerFromPlot(player: Player)
     local plotNum = Module.GetPlayerPlotNum(player)
     if plotNum then
+        local RestaurantHandling = SystemsContainer.RestaurantHandling
+        RestaurantHandling.DestroyRestaurant(player)
+        
         Module.Plots[plotNum] = false -- Make the plot available again (set to false)
         print(player.Name .. " has been removed from plot " .. plotNum)
         return true

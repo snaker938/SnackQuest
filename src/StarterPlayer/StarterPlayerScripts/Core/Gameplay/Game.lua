@@ -20,8 +20,12 @@ function Module.StartGameplay()
     local cityNumber = Module.PlayerData.City
     local restaurantNum = Module.PlayerData.Restaurant
     local plotNum = Module.PlayerData.PlotNum
+    local hasStartedRestaurant = Module.PlayerData.HasStartedCurrentRestaurant[1] -- Extract the value from the table
 
-    SystemsContainer.ParentSystems.Widgets.ToggleWidget("OpenRestaurantWidget", true, cityNumber, restaurantNum, plotNum)
+    -- Only display the widget if HasStartedCurrentRestaurant is false
+    if not hasStartedRestaurant then
+        SystemsContainer.ParentSystems.Widgets.ToggleWidget("OpenRestaurantWidget", true, cityNumber, restaurantNum, plotNum)
+    end
 end
 
 function Module.Start()

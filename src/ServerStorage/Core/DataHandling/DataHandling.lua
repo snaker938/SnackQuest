@@ -1,6 +1,10 @@
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 local ReplicatedModules = require(ReplicatedStorage:WaitForChild('Modules'))
 
+local ServerStorage = game:GetService('ServerStorage')
+
+local ServerModules = require(ServerStorage:WaitForChild("Modules"))
+
 local Warp = ReplicatedModules.Classes.Warp
 
 
@@ -11,6 +15,8 @@ local Module = {}
 
 function Module.GetAllData(player)
     local DataServer = SystemsContainer.DataServer
+    local PlotHandler = SystemsContainer.ParentSystems.RestaurantHandling.PlotHandling
+
 
     -- Helper function to process the data and remove the "Replicated" field
     local function processAllData(rawData)
@@ -28,11 +34,12 @@ function Module.GetAllData(player)
     -- Retrieve the raw data from DataServer
     local AllData = DataServer.GetAllData(player)
 
+    if not AllData then
+        player:Kick("Failed to fetch data for player: " .. player.Name)
+    end
+
     -- Process the data and remove the "Replicated" field
     local cleanedData = processAllData(AllData)
-
-    -- Retrieve the player's plot number
-    local PlotHandler = SystemsContainer.ParentSystems.PlotHandling.PlotService
  
     local plotNum = PlotHandler.GetPlayerPlotNum(player)
 
@@ -47,8 +54,8 @@ end
 function Module.Start()
     local TestRemote = Warp.Server("AddCoins");
 
-
     TestRemote:Connect(function(player, coins)
+        local DataServer = SystemsContainer.DataServer
         -- Fetch the current coins from DataServer for the player
         -- local currentCoins = DataServer.fetch(player, "Coins")
 
@@ -60,6 +67,8 @@ function Module.Start()
         -- else
         --     warn("Failed to fetch coins for player: " .. player.Name)
         -- end
+
+        DataServer.wipe(player)
 
         -- print(Module.GetAllData(player))
         -- print(DataServer.fetch(player, "City"))

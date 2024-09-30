@@ -48,7 +48,7 @@ Module.ProfileStructure = {
 			InstanceName = "IntValue",
 		}
 	},
-	HasPlayed = {
+	HasStartedCurrentRestaurant = {
 		CurrentData = {false},
 		Replicated = {
 			is = false,
@@ -584,15 +584,11 @@ function Module.StartServer()
 					end
 				end)
 			end
-
-			if Module.fetch(player, "HasPlayed")[1] == false then
-				print(player.Name .. " has not played before")
-			else
-				print(player.Name .. " has played before")
-			end
-
 			local createValuesTask = coroutine.resume(coroutine.create(createValues))
 			local updateValuesTask = coroutine.resume(coroutine.create(updateValues))
+
+			local RestaurantHandling = SystemsContainer.ParentSystems.Restaurant.RestaurantHandling
+        	RestaurantHandling.DisplayRestaurant(player)
 		end)
 	end
 
