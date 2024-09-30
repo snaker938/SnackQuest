@@ -587,7 +587,7 @@ function Module.StartServer()
 			local createValuesTask = coroutine.resume(coroutine.create(createValues))
 			local updateValuesTask = coroutine.resume(coroutine.create(updateValues))
 
-			local RestaurantHandling = SystemsContainer.ParentSystems.Restaurant.RestaurantHandling
+			local RestaurantHandling = SystemsContainer.ParentSystems.RestaurantHandling.RestaurantHandling
         	RestaurantHandling.DisplayRestaurant(player)
 		end)
 	end
