@@ -9,6 +9,8 @@ local Warp = ReplicatedModules.Classes.Warp
 
 local Interface = LocalPlayer:WaitForChild('PlayerGui')
 
+local LocalModules = require(LocalPlayer:WaitForChild("PlayerScripts"):WaitForChild("Modules"))
+
 local SystemsContainer = {}
 local WidgetControllerModule = {}
 
@@ -46,6 +48,12 @@ function Module.Start()
 	TestBtn.MouseButton1Click:Connect(function()
 		TestRemote:Fire(true, 10)
 	end)
+
+	local TestCooker = workspace:WaitForChild("TestCooker")
+
+	local DisplayOutlineService = LocalModules.Services.DisplayOutlineService
+
+	DisplayOutlineService.DisplayOutline(TestCooker)
 
 
 end

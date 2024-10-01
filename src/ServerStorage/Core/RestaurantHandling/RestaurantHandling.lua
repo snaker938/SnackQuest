@@ -58,8 +58,8 @@ function Module.DisplayRestaurant(player : Player)
     local DataHandling = SystemsContainer.ParentSystems.DataHandling.DataHandling
 
     local playerData = DataHandling.GetAllData(player)
-    local cityNumber = playerData.City
-    local restaurantNum = playerData.Restaurant
+    local cityNumber = playerData.CityNum
+    local restaurantNum = playerData.RestaurantNum
     local plotNum = PlotHandler.GetPlayerPlotNum(player)
 
     -- Get the restaurant name based on the current city and restaurant number
@@ -69,6 +69,14 @@ function Module.DisplayRestaurant(player : Player)
     local restaurantModel = Module.GetRestaurantModel(restaurantName)
     if not restaurantModel then
         return
+    end
+
+    -- Place the restaurant model in the "Plots" folder in the workspace
+    local plotsFolder = workspace:FindFirstChild("Plots")
+    if not plotsFolder then
+        plotsFolder = Instance.new("Folder")
+        plotsFolder.Name = "Plots"
+        plotsFolder.Parent = workspace
     end
 
     -- Destroy any existing restaurant on the player's plot before placing a new one
@@ -88,14 +96,6 @@ function Module.DisplayRestaurant(player : Player)
         clonedModel:SetPrimaryPartCFrame(CFrame.new(position) * CFrame.Angles(0, math.rad(orientation.Y), 0))
     else
         warn("PrimaryPart not set for model " .. clonedModel.Name)
-    end
-
-    -- Place the restaurant model in the "Plots" folder in the workspace
-    local plotsFolder = workspace:FindFirstChild("Plots")
-    if not plotsFolder then
-        plotsFolder = Instance.new("Folder")
-        plotsFolder.Name = "Plots"
-        plotsFolder.Parent = workspace
     end
 
     clonedModel.Parent = plotsFolder

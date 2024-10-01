@@ -17,8 +17,8 @@ function Module.StartGameplay()
     local GetAllDataRemote = Warp.Client("GetAllData")
     Module.PlayerData = GetAllDataRemote:Invoke(2)
 
-    local cityNumber = Module.PlayerData.City
-    local restaurantNum = Module.PlayerData.Restaurant
+    local cityNumber = Module.PlayerData.CityNum
+    local restaurantNum = Module.PlayerData.RestaurantNum
     local plotNum = Module.PlayerData.PlotNum
     local hasStartedRestaurant = Module.PlayerData.HasStartedCurrentRestaurant[1] -- Extract the value from the table
 

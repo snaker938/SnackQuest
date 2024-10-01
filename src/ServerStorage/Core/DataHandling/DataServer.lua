@@ -34,14 +34,14 @@ Module.ProfileStructure = {
 			Parent = "leaderstats",
 		}
 	},
-	City = {
+	CityNum = {
 		CurrentData = 1,
 		Replicated = {
 			is = false,
 			InstanceName = "IntValue",
 		}
 	},
-	Restaurant = {
+	RestaurantNum = {
 		CurrentData = 1,
 		Replicated = {
 			is = false,
@@ -53,6 +53,20 @@ Module.ProfileStructure = {
 		Replicated = {
 			is = false,
 			InstanceName = "Table",
+		}
+	},
+	RestaurantUpgradeLevel = {
+		CurrentData = 0,
+		Replicated = {
+			is = false,
+			InstanceName = "IntValue",
+		}
+	},
+	RestaurantProgress = {
+		CurrentData = {},
+		Replicated = {
+			is = false,
+			InstanceName = "IntValue",
 		}
 	},
 }
@@ -82,6 +96,7 @@ export type ProfileStructure = {
 export type Module = {
 	ProfileStoreName : string,
 
+	getAllData : (dataSource : {Player | {Player}}) -> {string | number | table}?,
 	createShard : (shardName : string, shardFunction : any) -> any,
 	useShard : (shardName : string, any : any) -> any,
 	removeShard : (shardName : string) -> any,
