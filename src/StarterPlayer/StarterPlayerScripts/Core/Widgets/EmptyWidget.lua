@@ -52,10 +52,10 @@ function Module.Start()
 	local TestCooker = workspace:WaitForChild("TestCooker")
 
 	local DisplayOutlineService = LocalModules.Services.DisplayOutlineService
+	local DisplayUpgradeArrowService = LocalModules.Services.DisplayUpgradeArrowService
 
 	DisplayOutlineService.DisplayOutline(TestCooker)
-
-
+	DisplayUpgradeArrowService.DisplayUpgradeArrow(TestCooker)
 end
 
 function Module.Init(ParentController, otherSystems)

@@ -68,12 +68,8 @@ end
 
 -- Function to create the dotted outline around the part
 function Module.DisplayOutline(part : Instance)
-    print(part.Name, part)
-
     -- Remove any existing outline
-    if part:FindFirstChild("Outline") then
-        part.Outline:Destroy()
-    end
+    Module.DestroyOutline(part)
 
     -- Create a folder to hold the outline parts
     local outlineFolder = Instance.new("Folder")
@@ -93,6 +89,13 @@ function Module.DisplayOutline(part : Instance)
         local startPos = corners[edge[1]]
         local endPos = corners[edge[2]]
         createDottedLine(startPos, endPos, outlineFolder)
+    end
+end
+
+-- Function to destroy the outline for a specific part
+function Module.DestroyOutline(part : Instance)
+    if part:FindFirstChild("Outline") then
+        part.Outline:Destroy()
     end
 end
 
