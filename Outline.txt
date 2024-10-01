@@ -104,3 +104,16 @@ Plot3:
 Plot4:
 231.324, 35.401, 24.908
 -0, -180, 0
+
+
+
+---------------------
+
+A data variable UpgradeIndex should be stored. Then, using the city num and restaurant num, all upgrades should be calculated and be the same result each time using an algorithm. All ugrades is a table which is calculated. I can get the UpgradeIndex item from the table. I can then get the number of customers that need to be spawned etc.
+
+A data variable determining the number of individual food counters in the restaurant that I have unlocked, and the upgrade index of each.
+
+
+
+
+
