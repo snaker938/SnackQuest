@@ -2,15 +2,15 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Assets = ReplicatedStorage:WaitForChild("Assets")
 
-local ReplicatedModules = require(ReplicatedStorage:WaitForChild('Modules'))
-local Trove = ReplicatedModules.Classes.Trove
+local ReplicatedModules = ReplicatedStorage:WaitForChild('Modules')
+local Trove = require(ReplicatedModules:WaitForChild("Classes"):WaitForChild("Trove"))
 
 local SystemsContainer = {}
 
 -- // Module // --
 local Module = {}
 
-Module.WidgetTrove = Trove.new()
+Module.Trove = Trove.new()
 
 -- Table to keep track of active arrows and their animations
 local activeArrows = {}
@@ -24,6 +24,7 @@ function Module.DisplayUpgradeArrow(part : Instance)
 
     -- Clone the UpgradeArrow model from ReplicatedStorage
     local arrowModel = Assets:WaitForChild("UpgradeArrow"):Clone()
+
     arrowModel.Name = "UpgradeArrow"
     arrowModel.Parent = workspace -- Or parent it to a suitable container
 
@@ -92,6 +93,8 @@ function Module.DisplayUpgradeArrow(part : Instance)
         arrow = arrowModel,
         connection = connection,
     }
+
+    Module.Trove:Add(arrowModel)
 end
 
 -- Function to destroy the upgrade arrow for a specific part
@@ -107,6 +110,8 @@ function Module.DestroyUpgradeArrow(part : Instance)
         end
         -- Remove from activeArrows table
         activeArrows[part] = nil
+
+        Module.Trove:Remove(part)
     end
 end
 

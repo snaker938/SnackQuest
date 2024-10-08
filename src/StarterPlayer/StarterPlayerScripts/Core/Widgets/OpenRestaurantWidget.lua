@@ -2,8 +2,8 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
-local ReplicatedModules = require(ReplicatedStorage:WaitForChild('Modules'))
-local Trove = ReplicatedModules.Classes.Trove
+local ReplicatedModules = ReplicatedStorage:WaitForChild('Modules')
+local Trove = require(ReplicatedModules:WaitForChild("Classes"):WaitForChild("Trove"))
 
 local LocalModules = require(LocalPlayer:WaitForChild("PlayerScripts"):WaitForChild("Modules"))
 
@@ -13,7 +13,7 @@ local Interface = LocalPlayer:WaitForChild('PlayerGui')
 
 local OpenRestaurantGui = Interface:WaitForChild("OpenRestaurantGui")
 
-local CityData = ReplicatedModules.Data.CityData
+local CityData = require(ReplicatedModules.Data.CityData)
 
 local SystemsContainer = {}
 local WidgetControllerModule = {}
@@ -108,6 +108,8 @@ function Module.OpenWidget(cityNumber, restaurantNumber, plotNumber)
     if Module.Open then
         return
     end
+
+    if true then return end
 
     Module.PlotNumber = plotNumber
 

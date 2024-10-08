@@ -1,6 +1,6 @@
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
-local ReplicatedModules = require(ReplicatedStorage:WaitForChild('Modules'))
-local Trove = ReplicatedModules.Classes.Trove
+local ReplicatedModules = ReplicatedStorage:WaitForChild('Modules')
+local Trove = require(ReplicatedModules:WaitForChild("Classes"):WaitForChild("Trove"))
 
 local SystemsContainer = {}
 local WidgetControllerModule = {}

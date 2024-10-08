@@ -119,6 +119,24 @@ end
 
 function Module.Init(otherSystems)
     SystemsContainer = otherSystems
+
+    game.Players.PlayerAdded:Connect(function(plr)
+        task.wait(1)
+        for _,part in pairs(plr.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CollisionGroup = "Player"
+                -- game:GetService("PhysicsService"):SetPartCollisionGroup(part,"Players")
+            end
+        end
+        plr.CharacterAdded:Connect(function(char)
+            for _,part in pairs(char:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CollisionGroup = "Player"
+                    -- game:GetService("PhysicsService"):SetPartCollisionGroup(part,"Players")
+                end
+            end
+        end)
+    end)
 end
 
 return Module

@@ -2,14 +2,16 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
-local ReplicatedModules = require(ReplicatedStorage:WaitForChild('Modules'))
-local Trove = ReplicatedModules.Classes.Trove
+local ReplicatedModules = ReplicatedStorage:WaitForChild('Modules')
+local Trove = require(ReplicatedModules:WaitForChild("Classes"):WaitForChild("Trove"))
 
-local Warp = ReplicatedModules.Classes.Warp
+local Warp = require(ReplicatedModules.Classes.Warp)
 
 local Interface = LocalPlayer:WaitForChild('PlayerGui')
 
 local LocalModules = require(LocalPlayer:WaitForChild("PlayerScripts"):WaitForChild("Modules"))
+
+local CityData = require(ReplicatedModules.Data.CityData)
 
 local SystemsContainer = {}
 local WidgetControllerModule = {}
@@ -56,6 +58,20 @@ function Module.Start()
 
 	DisplayOutlineService.DisplayOutline(TestCooker)
 	DisplayUpgradeArrowService.DisplayUpgradeArrow(TestCooker)
+
+	print("-------------- CityData Test --------------")
+	
+	print(CityData.GetNumRestaurantStations("Cafe"), CityData.GetNumRestaurantStations("Diner"), CityData.GetNumRestaurantStations("jifdh"))
+	print("---")
+	print(CityData.GetCityName(2))
+	print("---")
+	print(CityData.GetCityRestaurants(1), CityData.GetCityRestaurants(2))
+
+
+	print("-------------- CityData Test --------------")
+
+
+
 end
 
 function Module.Init(ParentController, otherSystems)

@@ -63,7 +63,8 @@ function Module.DisplayRestaurant(player : Player)
     local plotNum = PlotHandler.GetPlayerPlotNum(player)
 
     -- Get the restaurant name based on the current city and restaurant number
-    local restaurantName = CityData.GetCurrentRestaurantName(cityNumber, restaurantNum)
+    local restaurantName = "Lemonade Stand"
+    -- local restaurantName = CityData.GetCurrentRestaurantName(cityNumber, restaurantNum)
 
     -- Get the restaurant model
     local restaurantModel = Module.GetRestaurantModel(restaurantName)
@@ -87,7 +88,8 @@ function Module.DisplayRestaurant(player : Player)
     local orientation = PlotData.GetPlotData(plotNum, "orientation")
 
     -- Clone the restaurant model and set its position and orientation
-    local clonedModel = restaurantModel:Clone()
+    local clonedModel = restaurantModel:Clone() :: Model
+
     -- Name the cloned model as "{firstName}{secondName}_{plotNum}"
     clonedModel.Name = restaurantName:gsub("%s+", "") .. "_" .. plotNum
 
@@ -103,7 +105,7 @@ function Module.DisplayRestaurant(player : Player)
 end
 
 function Module.Start()
-    -- Placeholder for any initialization logic
+    
 end
 
 function Module.Init(otherSystems)

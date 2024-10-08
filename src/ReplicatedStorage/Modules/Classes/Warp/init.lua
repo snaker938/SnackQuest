@@ -3,7 +3,7 @@
 --!strict
 --!native
 --!optimize 2
-local Index = require(script.Index)
+local Index = require(script:WaitForChild("Index"))
 
 return {
 	Server = Index.Server,

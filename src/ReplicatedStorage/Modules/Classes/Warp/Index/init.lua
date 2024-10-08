@@ -6,9 +6,9 @@ local Index = {}
 local RunService = game:GetService("RunService")
 local IsServer = RunService:IsServer()
 
-local Util = script.Util
-local Server = script.Server
-local Client = script.Client
+local Util = script:WaitForChild("Util")
+local Server = script:WaitForChild("Server")
+local Client = script:WaitForChild("Client")
 
 local Type = require(script.Type)
 local Assert = require(Util.Assert)

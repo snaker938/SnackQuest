@@ -68,7 +68,10 @@ function Module.Start()
         --     warn("Failed to fetch coins for player: " .. player.Name)
         -- end
 
-        DataServer.wipe(player)
+        local CustomerHandling = SystemsContainer.ParentSystems.RestaurantHandling.CustomerHandling
+        CustomerHandling.SpawnCustomer(player)
+
+        -- DataServer.wipe(player)
 
         -- print(Module.GetAllData(player))
         -- print(DataServer.fetch(player, "City"))

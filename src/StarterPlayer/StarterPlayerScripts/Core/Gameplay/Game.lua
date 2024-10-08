@@ -2,9 +2,9 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
-local ReplicatedModules = require(ReplicatedStorage:WaitForChild('Modules'))
+local ReplicatedModules = ReplicatedStorage:WaitForChild('Modules')
 
-local Warp = ReplicatedModules.Classes.Warp
+local Warp = require(ReplicatedModules:WaitForChild("Classes"):WaitForChild("Warp"))
 
 local SystemsContainer = {}
 
