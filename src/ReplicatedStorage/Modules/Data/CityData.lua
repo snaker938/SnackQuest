@@ -23,39 +23,126 @@ Module.Cities = {
 
 
 Module.SmallStands = {
-    { Name = "Lemonade Stand", ImageId = 8409545804102, FoodStations = { "Lemonade" } },
-    { Name = "Popcorn Cart", ImageId = 0, FoodStations = { "Popcorn" } }
+    { Name = "Lemonade Stand", ImageId = 8409545804102, FoodStations = { { Name = "Lemonade", ImageId = 0 } } },
+    { Name = "Popcorn Cart", ImageId = 0, FoodStations = { { Name = "Popcorn", ImageId = 0 } } },
+    { Name = "Ice Cream Stall", ImageId = 0, FoodStations = { { Name = "Ice Cream", ImageId = 0 } } },
+    { Name = "Hot Dog Stand", ImageId = 0, FoodStations = { { Name = "Hot Dogs", ImageId = 0 } } },
+    { Name = "Pretzel Cart", ImageId = 0, FoodStations = { { Name = "Pretzels", ImageId = 0 } } },
+    { Name = "Smoothie Shack", ImageId = 0, FoodStations = { { Name = "Smoothies", ImageId = 0 } } },
+    { Name = "Fruit Stand", ImageId = 0, FoodStations = { { Name = "Fresh Fruit", ImageId = 0 } } },
+    { Name = "Juice Bar", ImageId = 0, FoodStations = { { Name = "Fresh Juice", ImageId = 0 } } },
+    { Name = "Coffee Kiosk", ImageId = 0, FoodStations = { { Name = "Coffee", ImageId = 0 } } },
+    { Name = "Donut Stand", ImageId = 0, FoodStations = { { Name = "Donuts", ImageId = 0 } } },
+    -- Additional entries
+    { Name = "Churro Cart", ImageId = 0, FoodStations = { { Name = "Churros", ImageId = 0 } } },
+    { Name = "Corn Roaster", ImageId = 0, FoodStations = { { Name = "Roasted Corn", ImageId = 0 } } },
+    { Name = "Candy Floss Stall", ImageId = 0, FoodStations = { { Name = "Candy Floss", ImageId = 0 } } },
+    { Name = "Bubble Tea Stand", ImageId = 0, FoodStations = { { Name = "Bubble Tea", ImageId = 0 } } },
+    { Name = "Waffle Wagon", ImageId = 0, FoodStations = { { Name = "Waffles", ImageId = 0 } } },
+    { Name = "Oyster Bar", ImageId = 0, FoodStations = { { Name = "Fresh Oysters", ImageId = 0 } } },
+    { Name = "Crepe Cart", ImageId = 0, FoodStations = { { Name = "Sweet Crepes", ImageId = 0 } } },
+    { Name = "Pancake Stand", ImageId = 0, FoodStations = { { Name = "Mini Pancakes", ImageId = 0 } } },
+    { Name = "Nacho Stand", ImageId = 0, FoodStations = { { Name = "Nachos", ImageId = 0 } } },
+    { Name = "Falafel Cart", ImageId = 0, FoodStations = { { Name = "Falafels", ImageId = 0 } } },
 }
 
 Module.BigStands = {
-    { Name = "BBQ Stand", ImageId = 0, FoodStations = { "BBQ" } },
-    { Name = "Hotpot Booth", ImageId = 0, FoodStations = { "Spicy Hotpot" } },
-    { Name = "Sushi Stand", ImageId = 0, FoodStations = { "Sushi" } }
-
+    { Name = "BBQ Stand", ImageId = 0, FoodStations = { { Name = "BBQ", ImageId = 0 } } },
+    { Name = "Hotpot Booth", ImageId = 0, FoodStations = { { Name = "Spicy Hotpot", ImageId = 0 } } },
+    { Name = "Sushi Stand", ImageId = 0, FoodStations = { { Name = "Sushi", ImageId = 0 } } },
+    { Name = "Taco Stall", ImageId = 0, FoodStations = { { Name = "Tacos", ImageId = 0 } } },
+    { Name = "Burger Grill", ImageId = 0, FoodStations = { { Name = "Burgers", ImageId = 0 } } },
+    { Name = "Pasta Corner", ImageId = 0, FoodStations = { { Name = "Pasta", ImageId = 0 } } },
+    { Name = "Salad Bar", ImageId = 0, FoodStations = { { Name = "Salads", ImageId = 0 } } },
+    { Name = "Seafood Shack", ImageId = 0, FoodStations = { { Name = "Seafood", ImageId = 0 } } },
+    { Name = "Kebab House", ImageId = 0, FoodStations = { { Name = "Kebabs", ImageId = 0 } } },
+    { Name = "Crepe Stand", ImageId = 0, FoodStations = { { Name = "Crepes", ImageId = 0 } } },
+    -- Additional entries
+    { Name = "Ramen Stall", ImageId = 0, FoodStations = { { Name = "Ramen", ImageId = 0 } } },
+    { Name = "Paella Stand", ImageId = 0, FoodStations = { { Name = "Paella", ImageId = 0 } } },
+    { Name = "Curry Corner", ImageId = 0, FoodStations = { { Name = "Curry", ImageId = 0 } } },
+    { Name = "BBQ Rib Shack", ImageId = 0, FoodStations = { { Name = "BBQ Ribs", ImageId = 0 } } },
+    { Name = "Dumpling House", ImageId = 0, FoodStations = { { Name = "Dumplings", ImageId = 0 } } },
+    { Name = "Pho Stall", ImageId = 0, FoodStations = { { Name = "Pho", ImageId = 0 } } },
+    { Name = "Burrito Bar", ImageId = 0, FoodStations = { { Name = "Burritos", ImageId = 0 } } },
+    { Name = "Gourmet Hot Dog Stand", ImageId = 0, FoodStations = { { Name = "Gourmet Hot Dogs", ImageId = 0 } } },
+    { Name = "Tapas Stall", ImageId = 0, FoodStations = { { Name = "Tapas", ImageId = 0 } } },
+    { Name = "Fish and Chips Stand", ImageId = 0, FoodStations = { { Name = "Fish and Chips", ImageId = 0 } } }, -- Included "Fish and Chips"
 }
 
 Module.Trucks = {
-    { Name = "Food Truck", ImageId = 0, FoodStations = { "Special Combo" } },
-    { Name = "Pizza Van", ImageId = 0, FoodStations = { "Cheese Pizza" } },
-    { Name = "Sushi Truck" , ImageId = 0, FoodStations = { "Sushi Platter" } }
+    { Name = "Food Truck", ImageId = 0, FoodStations = { { Name = "Special Combo", ImageId = 0 } } },
+    { Name = "Pizza Van", ImageId = 0, FoodStations = { { Name = "Cheese Pizza", ImageId = 0 } } },
+    { Name = "Sushi Truck", ImageId = 0, FoodStations = { { Name = "Sushi Platter", ImageId = 0 } } },
+    { Name = "BBQ Truck", ImageId = 0, FoodStations = { { Name = "BBQ Ribs", ImageId = 0 } } },
+    { Name = "Dessert Truck", ImageId = 0, FoodStations = { { Name = "Cupcakes", ImageId = 0 } } },
+    { Name = "Vegan Van", ImageId = 0, FoodStations = { { Name = "Vegan Wraps", ImageId = 0 } } },
+    { Name = "Coffee Truck", ImageId = 0, FoodStations = { { Name = "Espresso", ImageId = 0 } } },
+    { Name = "Taco Truck", ImageId = 0, FoodStations = { { Name = "Loaded Tacos", ImageId = 0 } } },
+    { Name = "Ice Cream Truck", ImageId = 0, FoodStations = { { Name = "Gelato", ImageId = 0 } } },
+    { Name = "Pasta Truck", ImageId = 0, FoodStations = { { Name = "Gourmet Pasta", ImageId = 0 } } },
+    -- Additional entries
+    { Name = "Burger Bus", ImageId = 0, FoodStations = { { Name = "Gourmet Burgers", ImageId = 0 } } },
+    { Name = "Crepe Mobile", ImageId = 0, FoodStations = { { Name = "Savory Crepes", ImageId = 0 } } },
+    { Name = "Seafood Truck", ImageId = 0, FoodStations = { { Name = "Shrimp Tacos", ImageId = 0 } } },
+    { Name = "Noodle Truck", ImageId = 0, FoodStations = { { Name = "Stir Fry Noodles", ImageId = 0 } } },
+    { Name = "Falafel Truck", ImageId = 0, FoodStations = { { Name = "Falafel Wraps", ImageId = 0 } } },
+    { Name = "Grilled Cheese Truck", ImageId = 0, FoodStations = { { Name = "Grilled Cheese Sandwiches", ImageId = 0 } } },
+    { Name = "Poutine Wagon", ImageId = 0, FoodStations = { { Name = "Poutine", ImageId = 0 } } },
+    { Name = "Juice Truck", ImageId = 0, FoodStations = { { Name = "Fresh Smoothies", ImageId = 0 } } },
+    { Name = "Churro Truck", ImageId = 0, FoodStations = { { Name = "Churros", ImageId = 0 } } },
+    { Name = "Waffle Truck", ImageId = 0, FoodStations = { { Name = "Belgian Waffles", ImageId = 0 } } },
 }
 
 Module.SmallRestaurants = {
-    { Name = "Cafe", ImageId = 0, FoodStations = { "Pancakes" } },
-    { Name = "Diner", ImageId = 0, FoodStations = { "Bacon and Eggs" } },
-    { Name = "Bistro", ImageId = 0, FoodStations = { "Steak Frites" } },
-    {Name = "Pancake House", ImageId = 0, FoodStations = { "Pancakes" } }
+    { Name = "Cafe", ImageId = 0, FoodStations = { { Name = "Pancakes", ImageId = 0 } } },
+    { Name = "Diner", ImageId = 0, FoodStations = { { Name = "Bacon and Eggs", ImageId = 0 } } },
+    { Name = "Bistro", ImageId = 0, FoodStations = { { Name = "Steak Frites", ImageId = 0 } } },
+    { Name = "Pancake House", ImageId = 0, FoodStations = { { Name = "Blueberry Pancakes", ImageId = 0 } } },
+    { Name = "Noodle Bar", ImageId = 0, FoodStations = { { Name = "Ramen", ImageId = 0 } } },
+    { Name = "Sandwich Shop", ImageId = 0, FoodStations = { { Name = "Club Sandwich", ImageId = 0 } } },
+    { Name = "Tapas Place", ImageId = 0, FoodStations = { { Name = "Tapas Selection", ImageId = 0 } } },
+    { Name = "Soup Kitchen", ImageId = 0, FoodStations = { { Name = "Tomato Soup", ImageId = 0 } } },
+    { Name = "Bagel Bakery", ImageId = 0, FoodStations = { { Name = "Cream Cheese Bagel", ImageId = 0 } } },
+    { Name = "Salad Stop", ImageId = 0, FoodStations = { { Name = "Caesar Salad", ImageId = 0 } } },
+    -- Additional entries
+    { Name = "Pizzeria", ImageId = 0, FoodStations = { { Name = "Margherita Pizza", ImageId = 0 } } },
+    { Name = "Sushi Express", ImageId = 0, FoodStations = { { Name = "Nigiri", ImageId = 0 } } },
+    { Name = "Burger Joint", ImageId = 0, FoodStations = { { Name = "Cheeseburger", ImageId = 0 } } },
+    { Name = "Crepe Cafe", ImageId = 0, FoodStations = { { Name = "Nutella Crepes", ImageId = 0 } } },
+    { Name = "Mexican Cantina", ImageId = 0, FoodStations = { { Name = "Quesadillas", ImageId = 0 } } },
+    { Name = "BBQ Pit", ImageId = 0, FoodStations = { { Name = "Pulled Pork Sandwich", ImageId = 0 } } },
+    { Name = "Fish and Chips Shop", ImageId = 0, FoodStations = { { Name = "Fish and Chips", ImageId = 0 } } }, -- Included "Fish and Chips"
+    { Name = "Bakery", ImageId = 0, FoodStations = { { Name = "Croissants", ImageId = 0 } } },
+    { Name = "Pasta Place", ImageId = 0, FoodStations = { { Name = "Spaghetti Bolognese", ImageId = 0 } } },
+    { Name = "Vegetarian Cafe", ImageId = 0, FoodStations = { { Name = "Veggie Burger", ImageId = 0 } } },
 }
 
 Module.BigRestaurants = {
-    { Name = "Steakhouse", ImageId = 0, FoodStations = { "Steak and Eggs" } },
-    { Name = "French Bistro", ImageId = 0, FoodStations = { "Beef Bourguignon" } },
+    { Name = "Steakhouse", ImageId = 0, FoodStations = { { Name = "Steak and Eggs", ImageId = 0 } } },
+    { Name = "French Bistro", ImageId = 0, FoodStations = { { Name = "Beef Bourguignon", ImageId = 0 } } },
+    { Name = "Italian Restaurant", ImageId = 0, FoodStations = { { Name = "Lasagna", ImageId = 0 } } },
+    { Name = "Seafood Restaurant", ImageId = 0, FoodStations = { { Name = "Grilled Salmon", ImageId = 0 } } },
+    { Name = "Sushi Bar", ImageId = 0, FoodStations = { { Name = "Sashimi Platter", ImageId = 0 } } },
+    { Name = "Mexican Grill", ImageId = 0, FoodStations = { { Name = "Fajitas", ImageId = 0 } } },
+    { Name = "Indian Cuisine", ImageId = 0, FoodStations = { { Name = "Butter Chicken", ImageId = 0 } } },
+    { Name = "Chinese Buffet", ImageId = 0, FoodStations = { { Name = "Dim Sum", ImageId = 0 } } },
+    { Name = "Brazilian Steakhouse", ImageId = 0, FoodStations = { { Name = "Churrasco", ImageId = 0 } } },
+    { Name = "Mediterranean Restaurant", ImageId = 0, FoodStations = { { Name = "Greek Salad", ImageId = 0 } } },
+    -- Additional entries
+    { Name = "Thai Palace", ImageId = 0, FoodStations = { { Name = "Pad Thai", ImageId = 0 } } },
+    { Name = "Korean BBQ", ImageId = 0, FoodStations = { { Name = "Korean BBQ", ImageId = 0 } } },
+    { Name = "German Beer Hall", ImageId = 0, FoodStations = { { Name = "Bratwurst", ImageId = 0 } } },
+    { Name = "French Gourmet", ImageId = 0, FoodStations = { { Name = "Coq au Vin", ImageId = 0 } } },
+    { Name = "Spanish Tapas", ImageId = 0, FoodStations = { { Name = "Paella", ImageId = 0 } } },
+    { Name = "Moroccan Delight", ImageId = 0, FoodStations = { { Name = "Tagine", ImageId = 0 } } },
+    { Name = "Japanese Teppanyaki", ImageId = 0, FoodStations = { { Name = "Teppanyaki Grill", ImageId = 0 } } },
+    { Name = "Lebanese Restaurant", ImageId = 0, FoodStations = { { Name = "Shawarma", ImageId = 0 } } },
+    { Name = "American Diner", ImageId = 0, FoodStations = { { Name = "Ribs and Fries", ImageId = 0 } } },
+    { Name = "Middle Eastern Grill", ImageId = 0, FoodStations = { { Name = "Falafel Platter", ImageId = 0 } } },
 }
 
--- Function to get the name of a city based on its number
-function Module.GetCityName(cityNumber)
-    return Module.Cities[cityNumber].Name
-end
+----------------- Private Functions -----------------
 
 -- Hash-like function to get a consistent number between 5 and 7 based on restaurant name
 function Module.GetVarRestaurantStations(restaurantName)
@@ -103,7 +190,6 @@ function Module.GetNumRestaurantStations(restaurantName)
     warn("Restaurant not found: " .. restaurantName)
     return nil
 end
-
 
 -- Function to get the base name of a restaurant
 function Module.AreRestaurantsSimilar(restaurantName1, restaurantName2)
@@ -303,5 +389,317 @@ function Module.GetCityRestaurants(cityNumber)
         return cityRestaurants -- Return the partial assignment
     end
 end
+
+-- Function to get the stations for all restaurants in a city
+function Module.GetCityStations(cityNumber)
+    -- Get the list of restaurants for the city
+    local cityRestaurants = Module.GetCityRestaurants(cityNumber)
+    if not cityRestaurants then
+        warn("Could not retrieve restaurants for city number " .. cityNumber)
+        return nil
+    end
+
+    local cityStations = {}
+    local usedStationNames = {}
+
+    -- Seed for deterministic selection based on cityNumber
+    local citySeed = cityNumber * 10000
+
+    -- Iterate over each restaurant position (1-7)
+    for restaurantNum = 1, 7 do
+        local restaurantName = cityRestaurants[restaurantNum]
+        if restaurantName then
+            -- Now proceed as before, using restaurantName
+            local category = Module.GetRestaurantCategory(restaurantName)
+            if not category then
+                warn("Unknown category for restaurant " .. restaurantName)
+                return nil
+            end
+
+            -- Get the restaurant data
+            local restaurantData = nil
+            for _, r in ipairs(Module[category]) do
+                if r.Name == restaurantName then
+                    restaurantData = r
+                    break
+                end
+            end
+            if not restaurantData then
+                warn("Restaurant data not found for " .. restaurantName)
+                return nil
+            end
+
+            -- Get the number of stations
+            local numStations = Module.GetNumRestaurantStations(restaurantName)
+            if not numStations then
+                warn("Could not determine number of stations for " .. restaurantName)
+                return nil
+            end
+
+            -- Initialize the list of stations for this restaurant
+            local stations = {}
+
+            -- Seed for deterministic selection based on cityNumber, restaurantName, and restaurantNum
+            local seed = citySeed
+            for i = 1, #restaurantName do
+                seed = seed + restaurantName:byte(i)
+            end
+            seed = seed + restaurantNum * 100
+
+            -- Function to get stations from a category, excluding used stations and own station
+            local function getStationsFromCategory(categoryList, ownStationName)
+                local stationList = {}
+                for _, r in ipairs(categoryList) do
+                    for _, fs in ipairs(r.FoodStations) do
+                        if fs.Name ~= ownStationName and not usedStationNames[fs.Name] then
+                            table.insert(stationList, fs)
+                        end
+                    end
+                end
+                return stationList
+            end
+
+            local ownStation = restaurantData.FoodStations[1]
+            local ownStationName = ownStation.Name
+            usedStationNames[ownStationName] = true -- Own station is already used
+
+            if category == "SmallStands" then
+                -- Small stand: one station, which is its own station
+                stations[1] = ownStation
+
+            elseif category == "BigStands" then
+                -- Big stand: first station is small station, second is its own station
+                local smallStations = getStationsFromCategory(Module.SmallStands, ownStationName)
+                if #smallStations == 0 then
+                    warn("No small stations available for big stand " .. restaurantName)
+                    return nil
+                end
+                local index = (seed % #smallStations) + 1
+                stations[1] = smallStations[index]
+                usedStationNames[stations[1].Name] = true
+                stations[2] = ownStation
+
+            elseif category == "Trucks" then
+                -- Truck: first station is small station, second is big station, third is another big station, fourth is its station
+                local smallStations = getStationsFromCategory(Module.SmallStands, ownStationName)
+                local bigStations = getStationsFromCategory(Module.BigStands, ownStationName)
+                if #smallStations == 0 or #bigStations < 2 then
+                    warn("Not enough stations available for truck " .. restaurantName)
+                    return nil
+                end
+                local index = (seed % #smallStations) + 1
+                stations[1] = smallStations[index]
+                usedStationNames[stations[1].Name] = true
+
+                index = ((seed + 1) % #bigStations) + 1
+                stations[2] = bigStations[index]
+                usedStationNames[stations[2].Name] = true
+
+                -- Remove the used big station
+                table.remove(bigStations, index)
+                if #bigStations == 0 then
+                    warn("Not enough big stations available for truck " .. restaurantName)
+                    return nil
+                end
+
+                index = ((seed + 2) % #bigStations) + 1
+                stations[3] = bigStations[index]
+                usedStationNames[stations[3].Name] = true
+
+                stations[4] = ownStation
+
+            elseif category == "SmallRestaurants" then
+                -- Small restaurant: variable number of stations (5-7)
+                -- Pattern as specified
+                local smallStations = getStationsFromCategory(Module.SmallStands, ownStationName)
+                local bigStations = getStationsFromCategory(Module.BigStands, ownStationName)
+                local truckStations = getStationsFromCategory(Module.Trucks, ownStationName)
+                local smallRestaurantStations = getStationsFromCategory(Module.SmallRestaurants, ownStationName)
+                if #smallStations == 0 or #bigStations < 2 or #truckStations == 0 then
+                    warn("Not enough stations available for small restaurant " .. restaurantName)
+                    return nil
+                end
+
+                stations[1] = smallStations[(seed % #smallStations) + 1]
+                usedStationNames[stations[1].Name] = true
+
+                stations[2] = bigStations[(seed + 1) % #bigStations + 1]
+                usedStationNames[stations[2].Name] = true
+
+                -- Remove used big station
+                table.remove(bigStations, ((seed + 1) % #bigStations) + 1)
+                if #bigStations == 0 then
+                    warn("Not enough big stations available for small restaurant " .. restaurantName)
+                    return nil
+                end
+
+                stations[3] = bigStations[(seed + 2) % #bigStations + 1]
+                usedStationNames[stations[3].Name] = true
+
+                stations[4] = truckStations[(seed + 3) % #truckStations + 1]
+                usedStationNames[stations[4].Name] = true
+
+                -- Fifth and sixth stations
+                local possibleStations = {}
+                for _, s in ipairs(truckStations) do
+                    if not usedStationNames[s.Name] then table.insert(possibleStations, s) end
+                end
+                for _, s in ipairs(bigStations) do
+                    if not usedStationNames[s.Name] then table.insert(possibleStations, s) end
+                end
+                for _, s in ipairs(smallRestaurantStations) do
+                    if not usedStationNames[s.Name] then table.insert(possibleStations, s) end
+                end
+
+                local currentIndex = 5
+                while currentIndex <= numStations - 1 and #possibleStations > 0 do
+                    local index = ((seed + currentIndex) % #possibleStations) + 1
+                    stations[currentIndex] = possibleStations[index]
+                    usedStationNames[stations[currentIndex].Name] = true
+                    table.remove(possibleStations, index)
+                    currentIndex = currentIndex + 1
+                end
+
+                -- Final station is own station
+                stations[numStations] = ownStation
+
+            elseif category == "BigRestaurants" then
+                -- Big restaurant: 10 stations
+                local smallStations = getStationsFromCategory(Module.SmallStands, ownStationName)
+                local bigStations = getStationsFromCategory(Module.BigStands, ownStationName)
+                local truckStations = getStationsFromCategory(Module.Trucks, ownStationName)
+                local smallRestaurantStations = getStationsFromCategory(Module.SmallRestaurants, ownStationName)
+                if #smallStations == 0 or #bigStations < 4 or #truckStations == 0 then
+                    warn("Not enough stations available for big restaurant " .. restaurantName)
+                    return nil
+                end
+
+                stations[1] = smallStations[(seed % #smallStations) + 1]
+                usedStationNames[stations[1].Name] = true
+
+                stations[2] = bigStations[(seed + 1) % #bigStations + 1]
+                usedStationNames[stations[2].Name] = true
+
+                -- Remove used big station
+                table.remove(bigStations, ((seed + 1) % #bigStations) + 1)
+
+                stations[3] = bigStations[(seed + 2) % #bigStations + 1]
+                usedStationNames[stations[3].Name] = true
+
+                stations[4] = truckStations[(seed + 3) % #truckStations + 1]
+                usedStationNames[stations[4].Name] = true
+
+                -- Fifth to seventh stations
+                local possibleStations = {}
+                for _, s in ipairs(truckStations) do
+                    if not usedStationNames[s.Name] then table.insert(possibleStations, s) end
+                end
+                for _, s in ipairs(bigStations) do
+                    if not usedStationNames[s.Name] then table.insert(possibleStations, s) end
+                end
+                for _, s in ipairs(smallRestaurantStations) do
+                    if not usedStationNames[s.Name] then table.insert(possibleStations, s) end
+                end
+
+                local currentIndex = 5
+                while currentIndex <= 7 and #possibleStations > 0 do
+                    local index = ((seed + currentIndex) % #possibleStations) + 1
+                    stations[currentIndex] = possibleStations[index]
+                    usedStationNames[stations[currentIndex].Name] = true
+                    table.remove(possibleStations, index)
+                    currentIndex = currentIndex + 1
+                end
+
+                -- Eighth and ninth stations are big stations
+                local remainingBigStations = {}
+                for _, s in ipairs(bigStations) do
+                    if not usedStationNames[s.Name] then table.insert(remainingBigStations, s) end
+                end
+                if #remainingBigStations < 2 then
+                    warn("Not enough big stations available for big restaurant " .. restaurantName)
+                    return nil
+                end
+
+                stations[8] = remainingBigStations[(seed + 8) % #remainingBigStations + 1]
+                usedStationNames[stations[8].Name] = true
+
+                -- Remove used big station
+                table.remove(remainingBigStations, ((seed + 8) % #remainingBigStations) + 1)
+                stations[9] = remainingBigStations[(seed + 9) % #remainingBigStations + 1]
+                usedStationNames[stations[9].Name] = true
+
+                -- Final station is own station
+                stations[10] = ownStation
+
+            else
+                warn("Unknown restaurant category for " .. restaurantName)
+                return nil
+            end
+
+            -- Store the stations for this restaurant
+            cityStations[restaurantNum] = stations
+
+        else
+            -- No restaurant assigned to this position
+            cityStations[restaurantNum] = {}
+        end
+    end
+
+    return cityStations
+end
+
+
+----------------- Public Functions -----------------
+-- Function to get the restaurants and their stations for a city
+function Module.GetCityStationsTable(cityNumber)
+    -- Get the list of restaurants for the city
+    local cityRestaurants = Module.GetCityRestaurants(cityNumber)
+    if not cityRestaurants then
+        warn("Could not retrieve restaurants for city number " .. cityNumber)
+        return nil
+    end
+
+    -- Get the stations for all restaurants in the city
+    local cityStations = Module.GetCityStations(cityNumber)
+    if not cityStations then
+        warn("Could not retrieve stations for city number " .. cityNumber)
+        return nil
+    end
+
+    local stationsTable = {}
+
+    -- Iterate over each restaurant position (1-7)
+    for restaurantNum = 1, 7 do
+        local restaurantName = cityRestaurants[restaurantNum]
+        local stations = cityStations[restaurantNum]
+        local stationNames = {}
+        if stations then
+            for i, station in ipairs(stations) do
+                stationNames[i] = station.Name
+            end
+        end
+        -- Store in the table
+        stationsTable[restaurantNum] = {
+            RestaurantName = restaurantName,
+            Stations = stationNames
+        }
+    end
+
+    -- Return the table instead of printing
+    return stationsTable
+end
+
+-- Function to get the stations for a specific restaurant in a city
+function Module.GetRestaurantStations(cityNumber, restaurantNum)
+    local cityStations = Module.GetCityStations(cityNumber)
+    if cityStations and cityStations[restaurantNum] then
+        return cityStations[restaurantNum]
+    else
+        warn("Could not retrieve stations for restaurant number " .. restaurantNum .. " in city number " .. cityNumber)
+        return nil
+    end
+end
+
+
 
 return Module

@@ -58,20 +58,6 @@ function Module.Start()
 
 	DisplayOutlineService.DisplayOutline(TestCooker)
 	DisplayUpgradeArrowService.DisplayUpgradeArrow(TestCooker)
-
-	print("-------------- CityData Test --------------")
-	
-	print(CityData.GetNumRestaurantStations("Cafe"), CityData.GetNumRestaurantStations("Diner"), CityData.GetNumRestaurantStations("jifdh"))
-	print("---")
-	print(CityData.GetCityName(2))
-	print("---")
-	print(CityData.GetCityRestaurants(1), CityData.GetCityRestaurants(2))
-
-
-	print("-------------- CityData Test --------------")
-
-
-
 end
 
 function Module.Init(ParentController, otherSystems)

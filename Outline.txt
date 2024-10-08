@@ -110,27 +110,22 @@ Plot4:
 ---------------------
 
 ## TODO
- - Each city has 7 restaurants
+The food stations:
+ - A small stand has one food station which is its station
+ - In a big stand, the first station is a small station, and the second station is its station
+ - In a truck, the first station is a small station, the second station is a big stand, the third is another big station, and the fourth is its station
+ - In a small restaurant, the first station is a small station, the second station is a big station, the third is a big station, the fouth is a truck station, the fith and sixth stations are a combination of a truck, big and other smallrestaurant stations. The final station (whether its the 5th, 6th or 7th) is its station
+ - In a big restaurant, the first station is a small station, the second station is a big station, the third is a big station, the fouth is a truck station, the fith, sixth and seventh stations are a combination of a truck, big and smallrestaurant stations, and the eighth and ninth station are big stations. The final station is its station.
+
+
+
+
+
+## DONE
+- Each city has 7 restaurants
 
  - The first restaurant is a small stand, the second is a big stand, the third is a truck, the fourth, fifth and sixth is a small restaurant the final seventh is a big restaurant.
 
  - The ability to override city restaurants. For example: London = {"Lemonade Stand", "Fish and Chip Restaurant"}. The rest will be random. The "position" of the overriding restaurants in the 7 restaurants, will be dependent on the type of the overriding restaurant. For example, if the overriding restaurant is a small stand, it will be the first restaurant. If it is a big stand, it will be the second restaurant. If it is a truck, it will be the third restaurant. If it is a small restaurant, it will be the fourth, fifth or sixth restaurant. If it is a big restaurant, it will be the seventh restaurant.
-
-The food stations:
- - A small stand has one food station, which is usually the food item it is referring to
- - In a big stand, the first station is a small station, and the second station is usually the food item it is referring to
- - In a truck, the first station is a small station, the second station is a big stand, the third is another big station, and the fourth is usually the food item it is referring to
- - In a small restaurant, the first station is a small station, the second station is a big station, the third is a big station, the fouth is a truck station, the fith and sixth stations are a combination of a truck, big and other smallrestaurant stations. The final station (whether its the 5th, 6th or 7th) is usually the food item it is referring to
- - In a big restaurant, the first station is a small station, the second station is a big station, the third is a big station, the fouth is a truck station, the fith, sixth and seventh stations are a combination of a truck, big and smallrestaurant stations, and the eighth and ninth station are big stations. The final station is usually the food item it is referring to
-
-
- - Make sure that the similar name restaurants cannot appear in the same city. For example, Sushi Stand and Sushi Truck cannot appear in the same city.
-
-## CANT DO NOW
-The user has to upgrade every single food station in each of the seven restaurants before moving onto the next city.
-
-
-## DONE
-
 
 
