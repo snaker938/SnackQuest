@@ -29,7 +29,7 @@ Module.SmallStands = {
 
 Module.BigStands = {
     { Name = "BBQ Stand", ImageId = 0, FoodStations = { "BBQ" } },
-    -- { Name = "Hotpot Booth", ImageId = 0, FoodStations = { "Hotpot" } },
+    { Name = "Hotpot Booth", ImageId = 0, FoodStations = { "Spicy Hotpot" } },
     { Name = "Sushi Stand", ImageId = 0, FoodStations = { "Sushi" } }
 
 }
@@ -173,125 +173,97 @@ function Module.GetCityRestaurants(cityNumber)
     end
 
     local cityName = cityData.Name
-    local cityRestaurants = {} -- Indexed by position (1-7)
     local overrides = cityData.Restaurants or {}
-    local assignedSmallRestaurantPositions = {}
-    local overrideCounts = {
-        SmallStands = 0,
-        BigStands = 0,
-        Trucks = 0,
-        SmallRestaurants = 0,
-        BigRestaurants = 0
+
+    -- Positions and their corresponding categories
+    local positions = {
+        [1] = "SmallStands",
+        [2] = "BigStands",
+        [3] = "Trucks",
+        [4] = "SmallRestaurants",
+        [5] = "SmallRestaurants",
+        [6] = "SmallRestaurants",
+        [7] = "BigRestaurants",
     }
 
-    -- First, process overrides and check for conflicts and counts
+    -- Initialize cityRestaurants with overrides
+    local cityRestaurants = {}
+    local usedRestaurantNames = {}
+
+    -- Process overrides and assign them to their positions
     for _, restaurantName in ipairs(overrides) do
         local category = Module.GetRestaurantCategory(restaurantName)
         local position = nil
+        local skipToNext = false
 
         if category == "SmallStands" then
             position = 1
-            overrideCounts.SmallStands = overrideCounts.SmallStands + 1
-            if overrideCounts.SmallStands > 1 then
-                warn("Too many SmallStand overrides in city " .. cityName)
-            end
         elseif category == "BigStands" then
             position = 2
-            overrideCounts.BigStands = overrideCounts.BigStands + 1
-            if overrideCounts.BigStands > 1 then
-                warn("Too many BigStand overrides in city " .. cityName)
-            end
         elseif category == "Trucks" then
             position = 3
-            overrideCounts.Trucks = overrideCounts.Trucks + 1
-            if overrideCounts.Trucks > 1 then
-                warn("Too many Truck overrides in city " .. cityName)
-            end
         elseif category == "SmallRestaurants" then
-            overrideCounts.SmallRestaurants = overrideCounts.SmallRestaurants + 1
-            if overrideCounts.SmallRestaurants > 3 then
-                warn("Too many SmallRestaurant overrides in city " .. cityName)
-            end
-            for _, pos in ipairs({4, 5, 6}) do
-                if not assignedSmallRestaurantPositions[pos] then
+            -- Assign to the first available small restaurant position
+            for pos = 4, 6 do
+                if not cityRestaurants[pos] then
                     position = pos
-                    assignedSmallRestaurantPositions[pos] = true
                     break
                 end
             end
             if not position then
                 warn("No available SmallRestaurant position for overridden restaurant " .. restaurantName .. " in city " .. cityName)
+                skipToNext = true
             end
         elseif category == "BigRestaurants" then
             position = 7
-            overrideCounts.BigRestaurants = overrideCounts.BigRestaurants + 1
-            if overrideCounts.BigRestaurants > 1 then
-                warn("Too many BigRestaurant overrides in city " .. cityName)
-            end
         else
             warn("Unknown category for restaurant " .. restaurantName)
+            skipToNext = true
         end
 
-        if position then
+        if not skipToNext then
+            -- Assign the overriding restaurant
+            cityRestaurants[position] = restaurantName
+            usedRestaurantNames[restaurantName] = true
+        end
+    end
+
+    -- Function to attempt assignment with backtracking
+    local function assignRestaurants(currentPos)
+        -- If we've assigned all positions, return true
+        if currentPos > 7 then
+            return true
+        end
+
+        -- If the position is already assigned (probably by an override), proceed to next
+        if cityRestaurants[currentPos] then
             -- Check for conflicts with already assigned restaurants
-            for assignedPos, assignedRestaurantName in pairs(cityRestaurants) do
-                if Module.AreRestaurantsSimilar(restaurantName, assignedRestaurantName) then
-                    -- Overriding restaurant takes priority
-                    -- Attempt to find a replacement for the conflicting restaurant
-                    local assignedCategory = Module.GetRestaurantCategory(assignedRestaurantName)
-                    local replacementFound = false
-                    local restaurantList = Module[assignedCategory]
-                    table.sort(restaurantList, function(a, b) return a.Name < b.Name end)
-                    for i = 1, #restaurantList do
-                        local index = ((cityNumber + assignedPos + i - 2) % #restaurantList) + 1
-                        local potentialRestaurant = restaurantList[index]
-                        local potentialName = potentialRestaurant.Name
-                        if not Module.AreRestaurantsSimilar(restaurantName, potentialName) and potentialName ~= assignedRestaurantName then
-                            cityRestaurants[assignedPos] = potentialName
-                            replacementFound = true
-                            break
-                        end
-                    end
-                    if not replacementFound then
-                        warn("No suitable replacement found for restaurant " .. assignedRestaurantName .. " in city " .. cityName)
-                    end
+            local conflict = false
+            for pos, assignedRestaurantName in pairs(cityRestaurants) do
+                if pos ~= currentPos and Module.AreRestaurantsSimilar(cityRestaurants[currentPos], assignedRestaurantName) then
+                    conflict = true
                     break
                 end
             end
 
-            -- Assign the overriding restaurant
-            cityRestaurants[position] = restaurantName
-            if category == "SmallRestaurants" then
-                assignedSmallRestaurantPositions[position] = true
+            if conflict then
+                -- Cannot resolve conflict due to override; backtrack
+                return false
+            else
+                -- Proceed to next position
+                return assignRestaurants(currentPos + 1)
             end
         end
-    end
 
-    -- Fill in the rest of the positions
-    local positions = {
-        {pos = 1, category = "SmallStands"},
-        {pos = 2, category = "BigStands"},
-        {pos = 3, category = "Trucks"},
-        {pos = 4, category = "SmallRestaurants"},
-        {pos = 5, category = "SmallRestaurants"},
-        {pos = 6, category = "SmallRestaurants"},
-        {pos = 7, category = "BigRestaurants"},
-    }
+        local category = positions[currentPos]
+        local restaurantList = Module[category]
+        table.sort(restaurantList, function(a, b) return a.Name < b.Name end)
 
-    for _, info in ipairs(positions) do
-        local pos = info.pos
-        local category = info.category
+        for _, restaurant in ipairs(restaurantList) do
+            local restaurantName = restaurant.Name
 
-        if not cityRestaurants[pos] then
-            local restaurantList = Module[category]
-            table.sort(restaurantList, function(a, b) return a.Name < b.Name end)
-            local found = false
-
-            for i = 1, #restaurantList do
-                local index = ((cityNumber + pos + i - 2) % #restaurantList) + 1
-                local restaurant = restaurantList[index]
-                local restaurantName = restaurant.Name
-
+            -- Skip used restaurants
+            if not usedRestaurantNames[restaurantName] then
                 -- Check for conflicts with already assigned restaurants
                 local conflict = false
                 for _, assignedRestaurantName in pairs(cityRestaurants) do
@@ -302,211 +274,34 @@ function Module.GetCityRestaurants(cityNumber)
                 end
 
                 if not conflict then
-                    cityRestaurants[pos] = restaurantName
-                    if category == "SmallRestaurants" then
-                        assignedSmallRestaurantPositions[pos] = true
+                    -- Assign restaurant to current position
+                    cityRestaurants[currentPos] = restaurantName
+                    usedRestaurantNames[restaurantName] = true
+
+                    -- Recurse to next position
+                    if assignRestaurants(currentPos + 1) then
+                        return true
                     end
-                    found = true
-                    break
+
+                    -- Backtrack
+                    cityRestaurants[currentPos] = nil
+                    usedRestaurantNames[restaurantName] = nil
                 end
             end
-
-            if not found then
-                warn("No suitable restaurant found for position " .. pos .. " in city " .. cityName)
-            end
         end
+
+        -- No valid assignment found for current position
+        return false
     end
 
-    return cityRestaurants
+    -- Start the assignment process from position 1
+    local success = assignRestaurants(1)
+    if success then
+        return cityRestaurants
+    else
+        warn("Could not assign restaurants for city " .. cityName .. " without conflicts.")
+        return cityRestaurants -- Return the partial assignment
+    end
 end
-
--- function Module.GetCityRestaurants(cityNumber)
---     local cityData = Module.Cities[cityNumber]
---     if not cityData then
---         warn("City not found: " .. cityNumber)
---         return nil
---     end
-
---     local cityName = cityData.Name
---     local cityRestaurants = {} -- Indexed by position (1-7)
---     local overrides = cityData.Restaurants or {}
---     local assignedCategories = {}
---     local assignedSmallRestaurantPositions = {}
---     local overrideCounts = {
---         SmallStands = 0,
---         BigStands = 0,
---         Trucks = 0,
---         SmallRestaurants = 0,
---         BigRestaurants = 0
---     }
-
---     -- First, process overrides and check for conflicts and counts
---     for _, restaurantName in ipairs(overrides) do
---         local category = Module.GetRestaurantCategory(restaurantName)
---         local position = nil
-
---         if category == "SmallStands" then
---             position = 1
---             overrideCounts.SmallStands = overrideCounts.SmallStands + 1
---             if overrideCounts.SmallStands > 1 then
---                 warn("Too many SmallStand overrides in city " .. cityName)
---             end
---         elseif category == "BigStands" then
---             position = 2
---             overrideCounts.BigStands = overrideCounts.BigStands + 1
---             if overrideCounts.BigStands > 1 then
---                 warn("Too many BigStand overrides in city " .. cityName)
---             end
---         elseif category == "Trucks" then
---             position = 3
---             overrideCounts.Trucks = overrideCounts.Trucks + 1
---             if overrideCounts.Trucks > 1 then
---                 warn("Too many Truck overrides in city " .. cityName)
---             end
---         elseif category == "SmallRestaurants" then
---             overrideCounts.SmallRestaurants = overrideCounts.SmallRestaurants + 1
---             if overrideCounts.SmallRestaurants > 3 then
---                 warn("Too many SmallRestaurant overrides in city " .. cityName)
---             end
---             for _, pos in ipairs({4, 5, 6}) do
---                 if not assignedSmallRestaurantPositions[pos] then
---                     position = pos
---                     assignedSmallRestaurantPositions[pos] = true
---                     break
---                 end
---             end
---             if not position then
---                 warn("No available SmallRestaurant position for overridden restaurant " .. restaurantName .. " in city " .. cityName)
---             end
---         elseif category == "BigRestaurants" then
---             position = 7
---             overrideCounts.BigRestaurants = overrideCounts.BigRestaurants + 1
---             if overrideCounts.BigRestaurants > 1 then
---                 warn("Too many BigRestaurant overrides in city " .. cityName)
---             end
---         else
---             warn("Unknown category for restaurant " .. restaurantName)
---         end
-
---         if position then
---             -- Check for conflicts with already assigned restaurants
---             for assignedPos, assignedRestaurantName in pairs(cityRestaurants) do
---                 if Module.AreRestaurantsSimilar(restaurantName, assignedRestaurantName) then
---                     -- Overriding restaurant takes priority
---                     -- Attempt to find a replacement for the conflicting restaurant
---                     local assignedCategory = Module.GetRestaurantCategory(assignedRestaurantName)
---                     local replacementFound = false
---                     local restaurantList = Module[assignedCategory]
---                     table.sort(restaurantList, function(a, b) return a.Name < b.Name end)
---                     for i = 1, #restaurantList do
---                         local index = ((cityNumber + assignedPos + i - 2) % #restaurantList) + 1
---                         local potentialRestaurant = restaurantList[index]
---                         local potentialName = potentialRestaurant.Name
---                         if not Module.AreRestaurantsSimilar(restaurantName, potentialName) and potentialName ~= assignedRestaurantName then
---                             cityRestaurants[assignedPos] = potentialName
---                             assignedCategories[potentialName] = assignedCategory
---                             replacementFound = true
---                             break
---                         end
---                     end
---                     if not replacementFound then
---                         warn("Warning 1: No suitable replacement found for restaurant " .. assignedRestaurantName .. " in city " .. cityName)
---                     end
---                     break
---                 end
---             end
-
---             -- Assign the overriding restaurant
---             cityRestaurants[position] = restaurantName
---             assignedCategories[restaurantName] = category
---             if category == "SmallRestaurants" then
---                 assignedSmallRestaurantPositions[position] = true
---             end
---         end
---     end
-
---     -- Fill in the rest of the positions
---     local positions = {
---         {pos = 1, category = "SmallStands"},
---         {pos = 2, category = "BigStands"},
---         {pos = 3, category = "Trucks"},
---         {pos = 4, category = "SmallRestaurants"},
---         {pos = 5, category = "SmallRestaurants"},
---         {pos = 6, category = "SmallRestaurants"},
---         {pos = 7, category = "BigRestaurants"},
---     }
-
---     for _, info in ipairs(positions) do
---         local pos = info.pos
---         local category = info.category
-
---         if not cityRestaurants[pos] then
---             local restaurantList = Module[category]
---             table.sort(restaurantList, function(a, b) return a.Name < b.Name end)
---             local found = false
-
---             for i = 1, #restaurantList do
---                 local index = ((cityNumber + pos + i - 2) % #restaurantList) + 1
---                 local restaurant = restaurantList[index]
---                 local restaurantName = restaurant.Name
-
---                 -- Check for conflicts with already assigned restaurants
---                 local conflict = false
---                 for assignedPos, assignedRestaurantName in pairs(cityRestaurants) do
---                     if Module.AreRestaurantsSimilar(restaurantName, assignedRestaurantName) then
---                         conflict = true
---                         break
---                     end
---                 end
-
---                 if not conflict then
---                     cityRestaurants[pos] = restaurantName
---                     assignedCategories[restaurantName] = category
---                     if category == "SmallRestaurants" then
---                         assignedSmallRestaurantPositions[pos] = true
---                     end
---                     found = true
---                     break
---                 end
---             end
-
---             if not found then
---                 -- Attempt to find a replacement for the conflicting restaurant
---                 local conflictingRestaurant = nil
---                 for i = 1, #restaurantList do
---                     local index = ((cityNumber + pos + i - 2) % #restaurantList) + 1
---                     local restaurant = restaurantList[index]
---                     local restaurantName = restaurant.Name
-
---                     -- Check if the restaurant conflicts and could not be assigned
---                     for assignedPos, assignedRestaurantName in pairs(cityRestaurants) do
---                         if Module.AreRestaurantsSimilar(restaurantName, assignedRestaurantName) then
---                             conflictingRestaurant = restaurantName
---                             break
---                         end
---                     end
---                     if conflictingRestaurant then
---                         break
---                     end
---                 end
-
---                 if conflictingRestaurant then
---                     warn("Warning 2: No suitable replacement found for restaurant " .. conflictingRestaurant .. " in city " .. cityName)
---                 else
---                     warn("No suitable restaurant found for position " .. pos .. " in city " .. cityName)
---                 end
---             end
---         end
---     end
-
---     return cityRestaurants
--- end
-
-
-
-
-
-
-
 
 return Module
