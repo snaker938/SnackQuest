@@ -1,4 +1,6 @@
 --------------------------------------------- Require Modules --------------------------------------------------------------------------------
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Captures, false)
+
 
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 require(ReplicatedStorage:WaitForChild('Modules'))

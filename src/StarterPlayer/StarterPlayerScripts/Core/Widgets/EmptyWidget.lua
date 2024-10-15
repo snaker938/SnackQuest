@@ -58,6 +58,8 @@ function Module.Start()
 
 	DisplayOutlineService.DisplayOutline(TestCooker)
 	DisplayUpgradeArrowService.DisplayUpgradeArrow(TestCooker)
+
+	
 end
 
 function Module.Init(ParentController, otherSystems)
