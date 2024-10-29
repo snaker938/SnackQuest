@@ -161,8 +161,8 @@ Make in batches: 3.5k gold, soda x2
 Watch a tutorial: 5k gold, faster hotdog
 Better shoes: 8k gold, faster cashiers
 Post a job advert: 10k gold, +1 cashier
-Be Vocal: 18k gold, +1 customer
-BBQ SauceL: 35k gold, hotdog x2
+Be vocal: 18k gold, +1 customer
+BBQ Sauce: 35k gold, hotdog x2
 
 
 Cost to move to next restaurant 251k gold 
@@ -200,7 +200,133 @@ Gold Generated: {}
 
 Cost To Upgrade: {}
 
+--------------------------------------------------------
 
+---Upgrade Outline---
+
+Specific upgrades related to food stations inside of CityData.lua, for example:
+{ Name = "Steakhouse", ImageId = 0, DriveThru = True, NumTables = {2, 4}, FoodStation = { Name = "Steak and Eggs", ImageId = 0, Upgrades = {{upgradeName, Type}, ...} } },
+
+
+---- UpgradeData.lua -----
+
+-- The first index will be the maximum number of waiters/baristas etc., the second index will be the maximum number of chefs. If there are no chefs, the second index will be 0. If the first index is a table, a random value will be chosen for the restaurant. The value chosen should be the same each time the restaurant is loaded
+Module.NumStaffForRestaurant = {
+  SmallStand = {1, 0},
+  BigStand = {2, 0},
+  Truck = {4, 0},
+  SmallRestaurant5Stations = {{5, 6}, 4},
+  SmallRestaurant6Stations = {{6, 7}, 5},
+  SmallRestaurant7Stations = {{7, 8}, 6},
+  BigRestaurant = {{9, 10, 11}, 7}
+}
+
+-- If the value is a table, a random value will be chosen for the restaurant. The value chosen should be the same each time the restaurant is loaded.
+Module.MaxCustomersForRestaurant = {
+  SmallStand = 2,
+  BigStand = 4,
+  Truck = 7,
+  SmallRestaurant5Stations = 12,
+  SmallRestaurant6Stations = 13,
+  SmallRestaurant7Stations = 14,
+  BigRestaurant = {17, 18, 19}
+}
+
+-- Each car has 4 customers in it
+Module.MaxCarNumForRestaurant = {
+  SmallStand = 0,
+  BigStand = 0,
+  Truck = 1,
+  SmallRestaurant5Stations = {1, 2},
+  SmallRestaurant6Stations = {2, 3},
+  SmallRestaurant7Stations = {2, 3, 4},
+  BigRestaurant = {3, 4, 5}
+}
+
+
+----Determining the of upgrades of each type----
+Each decrease preparation time is cut 50% for the DecreasePrepTime upgrades
+Each increase staff speed is 50% faster for the IncreaseStaffSpeed upgrades
+
+To get the base cost of the uprades, the first upgrade is always 13 gold (for the first city restaurants). Get the cost of the last upgrade. Find the number of upgrades. Divide the cost of the last upgrade by the number of upgrades. This is base step gold increase for each upgrade. 
+
+We get a list of all the base costs of the upgrades for the specific restaurant using the above specification. We need a unique base cost for every upgrade for the restaurant. If we have N number of upgrades, we need a table of N number costs for each upgrade. This should be called UpgradeCosts.
+
+Once we have a list of the base costs for the upgrades of the specific restaurant, we can assign each upgrade to the cost and create the final upgrade table: local upgrades = {upgrade1, upgrade2, ...}. In this table, upgrade1, upgrade2 etc. will be a table itself containging the details of the upgrade, such as the name, description, type, description, effect, and the cost!
+
+There are certain procedures to assign each upgrade to a cost, listed below, along with the procedures to find the number of upgrades of a specific type:
+
+
+DecreasePrepTime: For the small and big stands, there will be 1 for each station. For the truck and all small restaurants, there will be 2 for each station. For the big restaurant, there will be 3 for each station. To assign these upgrades a cost in the UpgradeCost table: if there are multiple (2 or 3) upgrades for a station (the restaurant isnt a small or big stand), the cost increases by each upgrade. The last upgrade for the station will be the most expensive. The cost for the first upgrade of the food station will always cost more than the cost to unlock the station itself.
+
+IncreaseProfit: For the small stand, there is 0. For the big stand, there is 1 at x2 for each station. For the truck there is 1 at x3 for each station. For the small restaurants, each station has 1 x3, x5, x10 and x20. For the big restaurants, the 1-7 stations have 1 x3, x5, x10, x20, x50, x100. The 8, 9 and 10 stations have 1 x3, x5, x10, x20, x50 and then x200, x300, x500 respectively. The overdrive upgrade appears once on the truck, small and big restaurants, and has a value of x5.
+
+IncreaseStaffSpeed: For small stand, there is 0. For big stand, there is 1. For truck, there is 2. For small restaurant5, there is 2 for both waiters and chefs, for small restaurant6, there is 3 and 2 for waiters and chefs respectively. For small restaurant7, there is 3 for both. For big restaurant, there is either 3 or 4 for waiters and either 3 or 4 for chefs. The value should be the same each time the restaurant is loaded.
+
+IncreaseCarCount: If the restaurant has a drive thru, then check what type of restaurant it is. Only Trucks, Small and Big restaurants should have cars. Get MaxCarNumForRestaurant. If the value is a table, then randomly choose a value from the table. The value should be the same each time the restaurant is loaded. Car customers do not count towards the total customer count for the restaurant.
+
+AddTable: Inside of the NumTables table, inside of each restaurant data. This will be the number of individual table upgrades that the user can get. For example, in the Steakhouse, there are 2 tables of values 2 and 4. The first table will seat 2 customers, the second table will seat 4 customers. Table customers count towards the total customer count for the restaurant. Because there are two values in the table data set, there will be two table upgrades for the Steakhouse.
+
+IncreaseCustCount: Get the value for the specific restaurant using MaxCustomersForRestaurant. If the value is a table, then randomly choose a value from the table. The value should be the same each time the restaurant is loaded. Lets say the value we get is 9. We first see if the restaurant has tables. We get the sum of the AddTable table variable. We subtract this sum from the value we got from MaxCustomersForRestaurant. This will be the number of customers that will not be seated at a table, and therefore needs separate upgrades to unlock these customers, as they will not be covered by the table upgrades. Lets say there is a total table sum of 2. We now need 7 customers that will be unlocked by a variable number of different upgrades. There are 4 different value upgrades which can be used to add to the 7 we need. We can get +1, +2, +3 or +4 non-seated customer upgrades. We need to randomly choose a selection of these values, not just the most obvious, to get the value we need. For example, dont want 7 +1 upgrades, but rather a mix of the different values. For example, we could have 2 +3 and 1 +1 OR 1 +4, 1 +2 and 1 +1. Whatever combination is chosen, this combination must be the same each time the restaurant is loaded. However, the probability of each +1,..+4 upgrade is different. Most should be +2 or +3, with a few +1 and +4, still making sure that one type of upgrade (+1,..+4) is not chosen too many times. Obviously, if the number (+1,..+4) is bigger than the number of customers needed, pick another number.
+
+IncreaseStaffCount: Get the value for the specific restaurant using NumStaffForRestaurant. If the value is a table, then randomly choose a value from the table. The value should be the same each time the restaurant is loaded. The first index will be the maximum number of waiters/baristas etc., the second index will be the maximum number of chefs. If there are no chefs, the first index will be the people who can cook/serve all the food. If there are both waiters and chefs, then the waiters will only cook specific foods and serve the food, while chefs only cook the remaining foods. To get the number of different upgrades for this category, we can use a similar process to the IncreaseCustCount. We have two numbers, one for the max num of the waiters, one for the chefs. For chefs: we can either have +1 or +2. +1 has an 70% chance of being picked when deciding for each upgrade. There should never be more than 3 +2's for chefs. For waiters: we can have +1, +2 or +3. There should only be one +3, with a 10% chance of being picked in whole restaurant (not for each upgrade). +1 has a 60% chance of being picked, +2 has a 30% chance of being picked. The combination of the +1, +2 and +3 upgrades should be the same each time the restaurant is loaded. There should be much less +2's than +1's. Obviously, if the number (+1, +2, +3) is bigger than the number of staff needed, pick another number.
+
+
+
+Last Upgrade Costs:
+Small Stand: 250 gold
+Big Stand: 35k gold 
+Truck: 2b gold
+Small Restaurant 1: 15aa gold
+Small Restaurant 2: 750aa gold
+Small Restaurant 3: 1.88ac gold
+Big Restaurant: 1.54ag gold
+
+
+on city 24, upgrades are x5 more expensive to buy compared to city 1
+------
+--Generic Upgrade Names--
+Module.IncreaseCustomerCount = {}  
+
+Module.AddTable = {}
+
+Module.IncreaseCarCount = {}
+
+Module.IncreaseStaffCount = {}
+
+Module.IncreaseProfit = {}
+
+Module.DecreasePreparationTime = {}
+
+Module.IncreaseStaffSpeed = {}
+
+ 
+
+--------------------------------- CITY 1 ---------------------------------
+
+--Small Stand--
+Get another customer: 13 gold, +1 customer
+Hire Robert: 30 gold, +1 cashier
+Popularity: 175 gold, +1 customer
+Better equipment: 250 gold, faster lemonade
+
+
+--Big Stand--
+Text your friends: 13 gold, +1 customer
+Hire Raymond: 18 gold, +1 cashier
+Hand out flyers: 90 gold, +1 customer
+Better equipment: 500 gold, faster soda
+Hire Raymond's referral: 1k gold, +1 cashier
+Post on social media: 2.5k gold, +1 customer
+Make in batches: 3.5k gold, soda x2
+Watch a tutorial: 5k gold, faster hotdog
+Better shoes: 8k gold, faster cashiers
+Post a job advert: 10k gold, +1 cashier
+Be vocal: 18k gold, +1 customer
+BBQ Sauce: 35k gold, hotdog x2
+
+
+--Truck--
 Text your friends: 13 gold, +1 customer
 Hire Sean: 18 gold, +1 cashier
 Say "Come Agauin": 300 gold, +1 customer
@@ -224,3 +350,304 @@ Overdrive: 15m gold, everything x5
 Precut salad: 40m gold, faster wrap
 Bigger glass: 75m gold, milkshake x3
 Better multitasking: 2B gold, faster milkshakes
+
+
+---Small Restaurant 1---
+Post on scial media: 13 gold, +1 customer
+Hire Sally: 60 gold, +1 barista
+Free samples: 400 gold, +1 customer
+Better equipment: 1k gold, faster coffee
+Help wanted sign: 1.5k gold, +1 barista
+Post a trendy pic: 3k gold, +1 customer
+Freshly roasted beans: 30k gold, coffee x3
+Better oven: 50k gold, faster muffins
+Buy a table: 180k gold, +2 customers
+Better shoes: 220k gold, faster baristas
+Hire Christine: 300k gold, +1 barista
+Preroasted beans: 800k gold, faster coffee
+Chocolate chips: 1.5m gold, muffins x3
+Watch a baking tutorial: 2.5m gold, faster cheesecake
+Ice coffee: 9m gold, coffee x5
+Window area: 25m gold, +3 customers
+Ask for referrals: 30m gold, +1 barista
+Make in batches: 40m gold, faster muffins
+Bake with love: 75m gold, cheesecake x3
+Sharper knife: 125m gold, faster sandwichs
+blueberry dream: 450m gold, muffins x5
+Bigger cups: 741m gold, coffee x10
+Roller blades: 900m gold, faster baristas
+Hire a cake consulatant: 2b gold, faster cheesecake
+offerr referral's bonus: 2.5b gold, +1 barista
+Avocado: 3.75b gold, sandwichs x3
+Outdoor seatting area: 10b gold, +4 customers
+Freshly made: 22.5b gold, x5 cheesecake
+Whole wheat: 37.1b gold, x10 muffins
+Precut salad: 100b gold, faster sandwich
+Whipped cream: 120b gold, x20 coffee
+Overdrive: 270b gold, everything x5
+Visit a university job fair: 500b gold, +1 barista
+Smooth floors: 900b gold, faster baristas
+Whole wheat bread: 1.3t gold, x5 sandwichs
+Cherry on top: 1.86t gold, x10 cheesecake
+Lemon flavoured: 6t gold, x20 muffins
+Hire a recruiter: 10t gold, +1 barista
+Nice looking sandwich: 92.7t gold, x10 sandwich
+Bigger slices: 300t gold, x20 cheesecake
+Tower sandwich: 15aa gold, x20 sandwich
+
+
+---Small Restaurant 2---
+Hand out flyers: 13 gold, +1 customer
+Free samples: 400 gold, +1 customer
+Help wanted sign: 500 gold, +1 cashier
+Better equipment: 1k gold, faster soda
+Post on social media: 3k gold, +1 customer
+Hire Mike: 15k gold, +1 chef
+Make in batches: 30k gold, soda x3
+Defrosted fries: 50 gold, faster fries
+Cold call random numbers: 100k gold, +1 customer
+Free energy drinks: 200k gold, faster chefs
+Multitasking: 800k gold, faster soda
+Extra ketchup: 1.5m gold, fries x3
+Lighter spatuals: 2.5m gold, faster burger
+Hire Mike's friend Mike: 5m gold, +1 chef
+Extra ice: 9m gold, soda x5
+Better shoes: 10m gold, faster cashiers
+Put yourself on maps: 20m gold, +2 customers
+Improve fryer: 40m gold, faster fries
+Extra cheese: 75m gold, burger x3
+Offer vacation days: 120m gold, +1 chef
+Frozen nuggets: 125m gold, faster nuggets
+Hire Roy: 126m gold, +1 cashier
+Sweet potatoes: 450m gold, fries x5
+Bigger cups: 741m gold, soda x10
+Medium rare: 2b gold, faster burger
+Extra nugget: 3.75b gold, nuggets x3
+Preheat oven: 6.25b gold, faster pizza
+Employee of the month: 9.5b gold, faster chefs
+Golden patty: 22.5b gold, burger x5
+Fresh fries: 37.1b gold, fries x10
+Offer delivery: 60b gold, +3 customers
+Deep fried: 100b gold, faster nuggets
+More flavours: 120b gold, soda x20
+Stone baked: 188b gold, pizza x3
+Better pay: 475b gold, faster cashiers
+Offer referral's bonus: 800b gold, +1 chef
+Free range: 1.13t gold, nuggets x5
+Extra patty: 1.86t gold, burger x10
+Hire another worker: 3.15t gold, +1 cashier
+Premade dough: 5t gold, faster pizza
+Extra large: 6t gold, fries x20
+Buy a billboard ad: 9t gold, +4 customers
+Gym membership: 11t gold, faster chefs
+Overdrive: 13t gold, everything x5
+Stuffed crust: 56.3t gold, pizza x5
+Real chicken: 92.7t gold, nuggets x10
+Blue cheese: 300t gold, burger x20
+Roller blades: 550t gold, faster cashiers
+Hire a recruiter: 3.15aa gold, +2 chefs
+Extra cheese: 4.64aa gold, pizza x10
+Dip on the side: 15aa, nuggets x20
+Extra pepperoni: 750aa gold, pizza x20
+
+
+--Small Restaurant 3--
+Hire Tanya: 600 gold, +1 cashier
+Better fryer: 1k gold, faster donut
+Hire Irene: 15k gold, +1 chef
+Glazed donuts: 30k gold, donut x3
+Better equipment: 50k gold, faster coffee
+Post on social media: 100k gold, +1 car
+Bigger batches: 800k gold, faster donuts
+Freshly roasted beans: 1.5m gold, coffee x3
+Bigger oven: 2.5m gold, faster cookies
+Better shoes: 5m gold, faster cashiers
+Help wanted sign: 5.4m gold, +1 cashier
+Jam donuts: 9m, donut x5
+Ask around: 12m gold, +1 chef
+Preroasted beans: 40m gold, faster coffee
+Chocolate chips: 75m gold, cookies x3
+Better entrance: 80m gold, +1 car
+Baking sheets: 125m gold, faster croistants
+Iced coffee: 450m gold, coffee x5
+Chocolate syrup: 741m gold, donut x10
+Gym membership: 1.2b gold, faster chefs
+Bigger batches: 2b gold, faster cookies
+Extra butter: 3.75b gold, croissants x3
+Better oven: 6.25b gold, faster muffins
+Hire Tanya's friend: 10b gold, +1 chef
+Cookie dough: 22.5b gold, cookies x5
+Bigger cups: 37.1b gold, coffee x10
+Paid time off: 100b gold, +1 cashier
+Watch a tutorial: 100b gold, faster croissants
+Free car wash: 110b gold, +1 car
+Marshmellow Glaze: 120b gold, donut x20
+Chocolate chip: 188b gold, muffins x3
+Better scoop: 313b gold, faster icecream
+Roller blades: 850b gold, faster cashiers
+Served warm: 1.13t gold, croissants x5
+Caramel bits: 1.86t gold, cookies x10
+Make in batches: 5t gold, faster muffins
+Whipped cream: 6t gold, coffee x20
+Sprinkles: 9.38t gold, icecream x3
+Be nice to your chefs: 12t gold, +1 chef
+Better machines: 15.7t gold, faster milkshakes
+Buy a billboard ad: 55t gold, +1 car
+Blueberry dream: 56.3t gold, muffins x5
+Buy 1 get 1 free: 92.7t gold, croissants x10
+Buy an ice cream machine: 250t gold, faster icecream
+Extra cookie: 300t gold, cookies x20
+Lighter clothes: 455t gold, faster chefs
+Bigger glass: 469t gold, milkshakes x3
+Popsicle: 2.82aa gold, icecream x5
+Whole wheat: 4.64aa gold, x10 muffins
+Double the pay: 8aa gold, +1 chef
+Better multitasking: 12.5aa, faster milkshakes
+Chocolate stuffing: 15aa gold, croissants x20
+Overdrive: 35aa gold, everything x5
+Bigger straws: 141aa gold, milkshakes x5
+Bubblegum flavoured: 232aa gold, icecream x10
+Lemon flavoured: 750aa gold, muffins x20
+Longer breaks: 7ab gold, +1 chef
+Make in batches: 11.6a gold, milkshakes x10
+Sundae: 37.5ab gold, icecream x20
+Cherry on top: 1.88ac gold, milkshake x20
+
+
+--Big restaurant--
+Hand out flyers: 13 gold, +1 customer
+Hire your friend: 60 gold, +1 waiter
+Buy a table: 1k gold, +2 customers
+Multitasking: 1k gold, faster grape juice
+"Waiters wanted": 15k gold, +1 waiter
+Aged grapes: 30k gold, grape juice x3
+Precut ingredients: 50k gold, faster salad
+Buy another table: 90k gold, +2 customers
+Hire Sherry: 90k gold, +1 chef
+Free energy drinks: 200k gold, faster chefs
+Buy a pourer: 800k gold, faster grape juice
+Match customer's tips: 1.2m gold, +1 waiter
+Salad dressing: 1.5m gold, salad x3
+Bigger batches: 2.5m gold, faster tomato soup
+Organic grapes: 9m gold, grape juice x5
+Better shoes: 24m gold, faster waiters
+Sharper knife: 40m gold, faster salad
+Better blender: 75m gold, tomato soup x3
+Bigger pot: 125m gold, faster spaghetti
+Hire Suzanne: 130m gold, +1 chef
+Freshly picked vegetables: 450m gold, salad x5
+Fancy glasses: 741m gold, grape juice x10
+Buy a big table: 1.8b gold, +4 customers
+Expensive blender: 2b gold, faster tomato soup
+Customers not always right: 3b gold, +1 waiter
+Italian style: 3.75b gold, spaghetti x3
+Bigger pan: 6.25b gold, faster special burger
+Taste before serving: 22.5b gold, tomato soup x5
+Caesar salad: 37.1b gold, salad x10
+Practice making spaghetti: 100b gold, faster spaghetti
+Aged for 5 years: 120b gold, grape juice x20
+Post a job ad: 180b gold, +1 chef
+Blue cheese: 188b gold, special burger x3
+Hire a fish expert: 3133b gold, faster fish
+Extra meat balls: 1.13t gold, spaghetti x5
+Extra tomato: 1.86t gold, tomato soup x10
+Buy a burger grill: 5t gold, faster special burger
+Trendy salad recipe: 6t gold, salad x20
+Caught this morning: 9.38t gold, fish x3
+Employee of the month: 9.5t gold, faster chefs
+Watch a baking tutorial: 15.7t gold, faster cheesecake
+Faster hands: 45t gold, faster grape juice
+Extra patty: 56.3t gold, special burger x5
+Aged for a hundred years: 72t gold,  grape juice x50
+Special bolognese: 92.7t gold, spaghetti x10
+Buy another big table: 100t gold, +4 customers
+Stone baked: 250t gold, faster fish
+Special seasoning: 300t gold, tomato soup x20
+Bake with love: 469t gold, cheesecake x3
+Hire an intern: 700t gold, +1 chef
+Higher heat: 782t gold, faster turkey
+Hire the dude outside: 900t, +1 waiter
+Roller blades: 1.14aa gold, faster waiters
+Quicker cuts: 2.25aa gold, faster salad
+Remove the bones: 2.82aa gold, fish x5
+Olives: 3.6aa gold, salad x50
+Tower burger: 4.64aa gold, special burger x10
+Hire a cake consulatant: 12.5aa gold, faster cheesecake
+Extra basil: 15aa gold, spaghetti x20
+Baked potatoes: 23.5aa gold, turkey x3
+Medium rare: 39.1aa gold, faster steak
+Put the lid on: 113aa, faster tomato soup
+Freshly made: 141aa gold, cheesecake x5
+Fresh basil: 180aa gold, tomato soup x50
+Smoked salmon: 232aa gold, fish x10
+Buy smaller turkeys: 625aa gold, faster turkey
+Hire Steven: 750aa gold, +1 chef
+Golden patty: 750aa gold, special burger x20
+Aged for a thousand years: 788aa gold, grape juice x100
+T-Bone: 1.18ab gold, steak x3
+Bigger pot: 1.96ab gold, faster lobster
+Better communication: 5.63ab gold, faster spaghetti
+Extra gravy: 7.04ab gold, turkey x5
+Paid time off: 8.81ab gold, +2 waiters
+Ravioli: 9ab gold, spaghetti x50
+Outdoor area: 10ab gold, +6 customers
+Gym membership: 11ab gold, faster chefs
+Cherry on top: 11.6ab, cheesecake x10
+Higher heat: 31.3ab, faster steak
+Swordfish: 37.5ab gold, fish x20
+Caviar: 39.4ab gold, salad x100
+Corn on the side: 58.6ab gold, lobster x3
+Hire a burger consulatant: 282ab gold, faster special burger
+Marinated: 352ab gold, steak x50
+Japanese patty: 450ab gold, special burger x50
+Sweet stuffing: 579ab gold, turkey x10
+Offer referral's bonus: 680ab gold, +2 chefs
+Smooth floors: 1.32ac gold, faster waiters
+Buy a steamer: 1.57ac gold, faster lobster
+Bigger slices: 1.88ac gold, cheesecake x20
+Served with bread: 1.97ac gold, tomato soup x100
+Quicker hands: 14.ac gold, faster fish
+Special seasoning: 17.6ac gold, lobster x5
+Whole mackerel: 22.5ac, fish x50
+Bigger steak: 29ac gold, steak x10
+Double the pay: 55ac, +3 waiters
+Crispy sear: 93.8ac gold, turkey x20
+Mom's spaghetti: 98.6ac gold, spaghetti x100
+Outsource it: 704ac gold, faster cheesecake
+Chocolate fudge: 1.13ad gold, cheesecake x50
+Big lobster: 1.45ad gold, lobster x10
+Golden steak: 4.69ad gold, steak x20
+Caramelized onions: 4.93ad gold, special burger x100
+Overdrive: 30ad gold, everything x5
+Precooked: 35.2ad gold, faster turkey
+Free range turkey: 56.3ad gold, turkey x50
+Blue lobster: 235ad gold, lobster x20
+Fish for your own fish: 247ad gold, fish x100
+Baste the steak: 1.76ae gold, faster steak
+Dry aged: 2.82ae gold, steak x50
+Mom's recipe: 12.4ae gold, cheesecake x100
+Serve only half: 87.9ae gold, faster lobster
+King lobster: 141ae gold, lobster x50
+Fresh from the farm: 616ae gold, turkey x200
+Japanese steak: 30.8af gold, steak x300
+Giant lobster: 1.54ag gold, lobster x500
+
+---------------------------- CITY 2 ----------------------------
+
+--Small Stand--
+Get some help: 33 gold, +1 cashier
+Buy a table: 132 gold, +2 customers
+Watch a tutorial: 275 gold, faster 1
+
+
+--Big Stand--
+Text your friends: 15 gold, +1 customer
+Hand out flyers: 88 gold, +1 customer
+Hire Neil: 165 gold, +1 cashier
+Move faster: 550 gold, faster 1
+Post on social media: 2.75k gold, +1 customer
+Better paper quality: 3.86k gold, 1 x2
+Go Go Go!: 5.5k gold, faster 2
+Better shoes: 8.81k gold, faster cashiers
+Put up a sign: 19.8k gold, +1 customer
+Bigger bar: 35k gold, 2 x2

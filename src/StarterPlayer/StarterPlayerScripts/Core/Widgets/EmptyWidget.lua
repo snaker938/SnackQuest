@@ -59,6 +59,9 @@ function Module.Start()
 	DisplayOutlineService.DisplayOutline(TestCooker)
 	DisplayUpgradeArrowService.DisplayUpgradeArrow(TestCooker)
 
+	print(CityData.GetCityStationsTable(1))
+	print("----")
+	print(CityData.GetCityStationsTable(2))
 	
 end
 

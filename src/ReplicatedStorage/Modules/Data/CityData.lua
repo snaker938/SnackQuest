@@ -17,129 +17,124 @@ Module.NumStations = {
 }
 
 Module.Cities = {
-    { Name = "London", ImageId = 0, Restaurants = { "Lemonade Stand" } },
+    { Name = "London", ImageId = 0, Restaurants = { "Lemonade Stand", "Fish and Chip Shop" } },
     { Name = "Paris", ImagId = 0, Restaurants = { "French Bistro" } }
 }
 
 
 Module.SmallStands = {
-    { Name = "Lemonade Stand", ImageId = 8409545804102, FoodStations = { { Name = "Lemonade", ImageId = 0 } } },
-    { Name = "Popcorn Cart", ImageId = 0, FoodStations = { { Name = "Popcorn", ImageId = 0 } } },
-    { Name = "Ice Cream Stall", ImageId = 0, FoodStations = { { Name = "Ice Cream", ImageId = 0 } } },
-    { Name = "Hot Dog Stand", ImageId = 0, FoodStations = { { Name = "Hot Dogs", ImageId = 0 } } },
-    { Name = "Pretzel Cart", ImageId = 0, FoodStations = { { Name = "Pretzels", ImageId = 0 } } },
-    { Name = "Smoothie Shack", ImageId = 0, FoodStations = { { Name = "Smoothies", ImageId = 0 } } },
-    { Name = "Fruit Stand", ImageId = 0, FoodStations = { { Name = "Fresh Fruit", ImageId = 0 } } },
-    { Name = "Juice Bar", ImageId = 0, FoodStations = { { Name = "Fresh Juice", ImageId = 0 } } },
-    { Name = "Coffee Kiosk", ImageId = 0, FoodStations = { { Name = "Coffee", ImageId = 0 } } },
-    { Name = "Donut Stand", ImageId = 0, FoodStations = { { Name = "Donuts", ImageId = 0 } } },
-    -- Additional entries
-    { Name = "Churro Cart", ImageId = 0, FoodStations = { { Name = "Churros", ImageId = 0 } } },
-    { Name = "Corn Roaster", ImageId = 0, FoodStations = { { Name = "Roasted Corn", ImageId = 0 } } },
-    { Name = "Candy Floss Stall", ImageId = 0, FoodStations = { { Name = "Candy Floss", ImageId = 0 } } },
-    { Name = "Bubble Tea Stand", ImageId = 0, FoodStations = { { Name = "Bubble Tea", ImageId = 0 } } },
-    { Name = "Waffle Wagon", ImageId = 0, FoodStations = { { Name = "Waffles", ImageId = 0 } } },
-    { Name = "Oyster Bar", ImageId = 0, FoodStations = { { Name = "Fresh Oysters", ImageId = 0 } } },
-    { Name = "Crepe Cart", ImageId = 0, FoodStations = { { Name = "Sweet Crepes", ImageId = 0 } } },
-    { Name = "Pancake Stand", ImageId = 0, FoodStations = { { Name = "Mini Pancakes", ImageId = 0 } } },
-    { Name = "Nacho Stand", ImageId = 0, FoodStations = { { Name = "Nachos", ImageId = 0 } } },
-    { Name = "Falafel Cart", ImageId = 0, FoodStations = { { Name = "Falafels", ImageId = 0 } } },
+    { Name = "Lemonade Stand", ImageId = 8409545804102, FoodStation = { Name = "Lemonade", ImageId = 0 } },
+    { Name = "Popcorn Cart", ImageId = 0, FoodStation = { Name = "Popcorn", ImageId = 0 } },
+    { Name = "Ice Cream Stall", ImageId = 0, FoodStation = { Name = "Ice Cream", ImageId = 0 } },
+    { Name = "Hot Dog Stand", ImageId = 0, FoodStation = { Name = "Hot Dogs", ImageId = 0 } },
+    { Name = "Pretzel Cart", ImageId = 0, FoodStation = { Name = "Pretzels", ImageId = 0 } },
+    { Name = "Smoothie Shack", ImageId = 0, FoodStation = { Name = "Smoothies", ImageId = 0 } },
+    { Name = "Fruit Stand", ImageId = 0, FoodStation = { Name = "Fresh Fruit", ImageId = 0 } },
+    { Name = "Juice Bar", ImageId = 0, FoodStation = { Name = "Fresh Juice", ImageId = 0 } },
+    { Name = "Coffee Kiosk", ImageId = 0, FoodStation = { Name = "Coffee", ImageId = 0 } },
+    { Name = "Donut Stand", ImageId = 0, FoodStation = { Name = "Donuts", ImageId = 0 } },
+    { Name = "Churro Cart", ImageId = 0, FoodStation = { Name = "Churros", ImageId = 0 } },
+    { Name = "Corn Roaster", ImageId = 0, FoodStation = { Name = "Roasted Corn", ImageId = 0 } },
+    { Name = "Candy Floss Stall", ImageId = 0, FoodStation = { Name = "Candy Floss", ImageId = 0 } },
+    { Name = "Bubble Tea Stand", ImageId = 0, FoodStation = { Name = "Bubble Tea", ImageId = 0 } },
+    { Name = "Waffle Wagon", ImageId = 0, FoodStation = { Name = "Waffles", ImageId = 0 } },
+    { Name = "Oyster Bar", ImageId = 0, FoodStation = { Name = "Fresh Oysters", ImageId = 0 } },
+    { Name = "Crepe Cart", ImageId = 0, FoodStation = { Name = "Sweet Crepes", ImageId = 0 } },
+    { Name = "Pancake Stand", ImageId = 0, FoodStation = { Name = "Mini Pancakes", ImageId = 0 } },
+    { Name = "Nacho Stand", ImageId = 0, FoodStation = { Name = "Nachos", ImageId = 0 } },
+    { Name = "Falafel Cart", ImageId = 0, FoodStation = { Name = "Falafels", ImageId = 0 } },
 }
 
 Module.BigStands = {
-    { Name = "BBQ Stand", ImageId = 0, FoodStations = { { Name = "BBQ", ImageId = 0 } } },
-    { Name = "Hotpot Booth", ImageId = 0, FoodStations = { { Name = "Spicy Hotpot", ImageId = 0 } } },
-    { Name = "Sushi Stand", ImageId = 0, FoodStations = { { Name = "Sushi", ImageId = 0 } } },
-    { Name = "Taco Stall", ImageId = 0, FoodStations = { { Name = "Tacos", ImageId = 0 } } },
-    { Name = "Burger Grill", ImageId = 0, FoodStations = { { Name = "Burgers", ImageId = 0 } } },
-    { Name = "Pasta Corner", ImageId = 0, FoodStations = { { Name = "Pasta", ImageId = 0 } } },
-    { Name = "Salad Bar", ImageId = 0, FoodStations = { { Name = "Salads", ImageId = 0 } } },
-    { Name = "Seafood Shack", ImageId = 0, FoodStations = { { Name = "Seafood", ImageId = 0 } } },
-    { Name = "Kebab House", ImageId = 0, FoodStations = { { Name = "Kebabs", ImageId = 0 } } },
-    { Name = "Crepe Stand", ImageId = 0, FoodStations = { { Name = "Crepes", ImageId = 0 } } },
-    -- Additional entries
-    { Name = "Ramen Stall", ImageId = 0, FoodStations = { { Name = "Ramen", ImageId = 0 } } },
-    { Name = "Paella Stand", ImageId = 0, FoodStations = { { Name = "Paella", ImageId = 0 } } },
-    { Name = "Curry Corner", ImageId = 0, FoodStations = { { Name = "Curry", ImageId = 0 } } },
-    { Name = "BBQ Rib Shack", ImageId = 0, FoodStations = { { Name = "BBQ Ribs", ImageId = 0 } } },
-    { Name = "Dumpling House", ImageId = 0, FoodStations = { { Name = "Dumplings", ImageId = 0 } } },
-    { Name = "Pho Stall", ImageId = 0, FoodStations = { { Name = "Pho", ImageId = 0 } } },
-    { Name = "Burrito Bar", ImageId = 0, FoodStations = { { Name = "Burritos", ImageId = 0 } } },
-    { Name = "Gourmet Hot Dog Stand", ImageId = 0, FoodStations = { { Name = "Gourmet Hot Dogs", ImageId = 0 } } },
-    { Name = "Tapas Stall", ImageId = 0, FoodStations = { { Name = "Tapas", ImageId = 0 } } },
-    { Name = "Fish and Chips Stand", ImageId = 0, FoodStations = { { Name = "Fish and Chips", ImageId = 0 } } }, -- Included "Fish and Chips"
+    { Name = "BBQ Stand", ImageId = 0, FoodStation = { Name = "BBQ", ImageId = 0 } },
+    { Name = "Hotpot Booth", ImageId = 0, FoodStation = { Name = "Spicy Hotpot", ImageId = 0 } },
+    { Name = "Sushi Stand", ImageId = 0, FoodStation = { Name = "Sushi", ImageId = 0 } },
+    { Name = "Taco Stall", ImageId = 0, FoodStation = { Name = "Tacos", ImageId = 0 } },
+    { Name = "Burger Grill", ImageId = 0, FoodStation = { Name = "Burgers", ImageId = 0 } },
+    { Name = "Pasta Corner", ImageId = 0, FoodStation = { Name = "Pasta", ImageId = 0 } },
+    { Name = "Salad Bar", ImageId = 0, FoodStation = { Name = "Salads", ImageId = 0 } },
+    { Name = "Seafood Shack", ImageId = 0, FoodStation = { Name = "Seafood", ImageId = 0 } },
+    { Name = "Kebab House", ImageId = 0, FoodStation = { Name = "Kebabs", ImageId = 0 } },
+    { Name = "Crepe Stand", ImageId = 0, FoodStation = { Name = "Crepes", ImageId = 0 } },
+    { Name = "Ramen Stall", ImageId = 0, FoodStation = { Name = "Ramen", ImageId = 0 } },
+    { Name = "Paella Stand", ImageId = 0, FoodStation = { Name = "Paella", ImageId = 0 } },
+    { Name = "Curry Corner", ImageId = 0, FoodStation = { Name = "Curry", ImageId = 0 } },
+    { Name = "BBQ Rib Shack", ImageId = 0, FoodStation = { Name = "BBQ Ribs", ImageId = 0 } },
+    { Name = "Dumpling House", ImageId = 0, FoodStation = { Name = "Dumplings", ImageId = 0 } },
+    { Name = "Pho Stall", ImageId = 0, FoodStation = { Name = "Pho", ImageId = 0 } },
+    { Name = "Burrito Bar", ImageId = 0, FoodStation = { Name = "Burritos", ImageId = 0 } },
+    { Name = "Gourmet Hot Dog Stand", ImageId = 0, FoodStation = { Name = "Gourmet Hot Dogs", ImageId = 0 } },
+    { Name = "Tapas Stall", ImageId = 0, FoodStation = { Name = "Tapas", ImageId = 0 } },
+    { Name = "Fish and Chips Stand", ImageId = 0, FoodStation = { Name = "Fish and Chips", ImageId = 0 } },
 }
 
 Module.Trucks = {
-    { Name = "Food Truck", ImageId = 0, FoodStations = { { Name = "Special Combo", ImageId = 0 } } },
-    { Name = "Pizza Van", ImageId = 0, FoodStations = { { Name = "Cheese Pizza", ImageId = 0 } } },
-    { Name = "Sushi Truck", ImageId = 0, FoodStations = { { Name = "Sushi Platter", ImageId = 0 } } },
-    { Name = "BBQ Truck", ImageId = 0, FoodStations = { { Name = "BBQ Ribs", ImageId = 0 } } },
-    { Name = "Dessert Truck", ImageId = 0, FoodStations = { { Name = "Cupcakes", ImageId = 0 } } },
-    { Name = "Vegan Van", ImageId = 0, FoodStations = { { Name = "Vegan Wraps", ImageId = 0 } } },
-    { Name = "Coffee Truck", ImageId = 0, FoodStations = { { Name = "Espresso", ImageId = 0 } } },
-    { Name = "Taco Truck", ImageId = 0, FoodStations = { { Name = "Loaded Tacos", ImageId = 0 } } },
-    { Name = "Ice Cream Truck", ImageId = 0, FoodStations = { { Name = "Gelato", ImageId = 0 } } },
-    { Name = "Pasta Truck", ImageId = 0, FoodStations = { { Name = "Gourmet Pasta", ImageId = 0 } } },
-    -- Additional entries
-    { Name = "Burger Bus", ImageId = 0, FoodStations = { { Name = "Gourmet Burgers", ImageId = 0 } } },
-    { Name = "Crepe Mobile", ImageId = 0, FoodStations = { { Name = "Savory Crepes", ImageId = 0 } } },
-    { Name = "Seafood Truck", ImageId = 0, FoodStations = { { Name = "Shrimp Tacos", ImageId = 0 } } },
-    { Name = "Noodle Truck", ImageId = 0, FoodStations = { { Name = "Stir Fry Noodles", ImageId = 0 } } },
-    { Name = "Falafel Truck", ImageId = 0, FoodStations = { { Name = "Falafel Wraps", ImageId = 0 } } },
-    { Name = "Grilled Cheese Truck", ImageId = 0, FoodStations = { { Name = "Grilled Cheese Sandwiches", ImageId = 0 } } },
-    { Name = "Poutine Wagon", ImageId = 0, FoodStations = { { Name = "Poutine", ImageId = 0 } } },
-    { Name = "Juice Truck", ImageId = 0, FoodStations = { { Name = "Fresh Smoothies", ImageId = 0 } } },
-    { Name = "Churro Truck", ImageId = 0, FoodStations = { { Name = "Churros", ImageId = 0 } } },
-    { Name = "Waffle Truck", ImageId = 0, FoodStations = { { Name = "Belgian Waffles", ImageId = 0 } } },
+    { Name = "Food Truck", ImageId = 0, FoodStation = { Name = "Special Combo", ImageId = 0 } },
+    { Name = "Pizza Van", ImageId = 0, FoodStation = { Name = "Cheese Pizza", ImageId = 0 } },
+    { Name = "Sushi Truck", ImageId = 0, FoodStation = { Name = "Sushi Platter", ImageId = 0 } },
+    { Name = "BBQ Truck", ImageId = 0, FoodStation = { Name = "BBQ Ribs", ImageId = 0 } },
+    { Name = "Dessert Truck", ImageId = 0, FoodStation = { Name = "Cupcakes", ImageId = 0 } },
+    { Name = "Vegan Van", ImageId = 0, FoodStation = { Name = "Vegan Wraps", ImageId = 0 } },
+    { Name = "Coffee Truck", ImageId = 0, FoodStation = { Name = "Espresso", ImageId = 0 } },
+    { Name = "Taco Truck", ImageId = 0, FoodStation = { Name = "Loaded Tacos", ImageId = 0 } },
+    { Name = "Ice Cream Truck", ImageId = 0, FoodStation = { Name = "Gelato", ImageId = 0 } },
+    { Name = "Pasta Truck", ImageId = 0, FoodStation = { Name = "Gourmet Pasta", ImageId = 0 } },
+    { Name = "Burger Bus", ImageId = 0, FoodStation = { Name = "Gourmet Burgers", ImageId = 0 } },
+    { Name = "Crepe Mobile", ImageId = 0, FoodStation = { Name = "Savory Crepes", ImageId = 0 } },
+    { Name = "Seafood Truck", ImageId = 0, FoodStation = { Name = "Shrimp Tacos", ImageId = 0 } },
+    { Name = "Noodle Truck", ImageId = 0, FoodStation = { Name = "Stir Fry Noodles", ImageId = 0 } },
+    { Name = "Falafel Truck", ImageId = 0, FoodStation = { Name = "Falafel Wraps", ImageId = 0 } },
+    { Name = "Grilled Cheese Truck", ImageId = 0, FoodStation = { Name = "Grilled Cheese Sandwiches", ImageId = 0 } },
+    { Name = "Poutine Wagon", ImageId = 0, FoodStation = { Name = "Poutine", ImageId = 0 } },
+    { Name = "Juice Truck", ImageId = 0, FoodStation = { Name = "Fresh Smoothies", ImageId = 0 } },
+    { Name = "Churro Truck", ImageId = 0, FoodStation = { Name = "Churros", ImageId = 0 } },
+    { Name = "Waffle Truck", ImageId = 0, FoodStation = { Name = "Belgian Waffles", ImageId = 0 } },
 }
 
 Module.SmallRestaurants = {
-    { Name = "Cafe", ImageId = 0, FoodStations = { { Name = "Pancakes", ImageId = 0 } } },
-    { Name = "Diner", ImageId = 0, FoodStations = { { Name = "Bacon and Eggs", ImageId = 0 } } },
-    { Name = "Bistro", ImageId = 0, FoodStations = { { Name = "Steak Frites", ImageId = 0 } } },
-    { Name = "Pancake House", ImageId = 0, FoodStations = { { Name = "Blueberry Pancakes", ImageId = 0 } } },
-    { Name = "Noodle Bar", ImageId = 0, FoodStations = { { Name = "Ramen", ImageId = 0 } } },
-    { Name = "Sandwich Shop", ImageId = 0, FoodStations = { { Name = "Club Sandwich", ImageId = 0 } } },
-    { Name = "Tapas Place", ImageId = 0, FoodStations = { { Name = "Tapas Selection", ImageId = 0 } } },
-    { Name = "Soup Kitchen", ImageId = 0, FoodStations = { { Name = "Tomato Soup", ImageId = 0 } } },
-    { Name = "Bagel Bakery", ImageId = 0, FoodStations = { { Name = "Cream Cheese Bagel", ImageId = 0 } } },
-    { Name = "Salad Stop", ImageId = 0, FoodStations = { { Name = "Caesar Salad", ImageId = 0 } } },
-    -- Additional entries
-    { Name = "Pizzeria", ImageId = 0, FoodStations = { { Name = "Margherita Pizza", ImageId = 0 } } },
-    { Name = "Sushi Express", ImageId = 0, FoodStations = { { Name = "Nigiri", ImageId = 0 } } },
-    { Name = "Burger Joint", ImageId = 0, FoodStations = { { Name = "Cheeseburger", ImageId = 0 } } },
-    { Name = "Crepe Cafe", ImageId = 0, FoodStations = { { Name = "Nutella Crepes", ImageId = 0 } } },
-    { Name = "Mexican Cantina", ImageId = 0, FoodStations = { { Name = "Quesadillas", ImageId = 0 } } },
-    { Name = "BBQ Pit", ImageId = 0, FoodStations = { { Name = "Pulled Pork Sandwich", ImageId = 0 } } },
-    { Name = "Fish and Chips Shop", ImageId = 0, FoodStations = { { Name = "Fish and Chips", ImageId = 0 } } }, -- Included "Fish and Chips"
-    { Name = "Bakery", ImageId = 0, FoodStations = { { Name = "Croissants", ImageId = 0 } } },
-    { Name = "Pasta Place", ImageId = 0, FoodStations = { { Name = "Spaghetti Bolognese", ImageId = 0 } } },
-    { Name = "Vegetarian Cafe", ImageId = 0, FoodStations = { { Name = "Veggie Burger", ImageId = 0 } } },
+    { Name = "Cafe", ImageId = 0, FoodStation = { Name = "Pancakes", ImageId = 0 } },
+    { Name = "Diner", ImageId = 0, FoodStation = { Name = "Bacon and Eggs", ImageId = 0 } },
+    { Name = "Bistro", ImageId = 0, FoodStation = { Name = "Steak Frites", ImageId = 0 } },
+    { Name = "Pancake House", ImageId = 0, FoodStation = { Name = "Blueberry Pancakes", ImageId = 0 } },
+    { Name = "Noodle Bar", ImageId = 0, FoodStation = { Name = "Ramen", ImageId = 0 } },
+    { Name = "Sandwich Shop", ImageId = 0, FoodStation = { Name = "Club Sandwich", ImageId = 0 } },
+    { Name = "Tapas Place", ImageId = 0, FoodStation = { Name = "Tapas Selection", ImageId = 0 } },
+    { Name = "Soup Kitchen", ImageId = 0, FoodStation = { Name = "Tomato Soup", ImageId = 0 } },
+    { Name = "Bagel Bakery", ImageId = 0, FoodStation = { Name = "Cream Cheese Bagel", ImageId = 0 } },
+    { Name = "Salad Stop", ImageId = 0, FoodStation = { Name = "Caesar Salad", ImageId = 0 } },
+    { Name = "Pizzeria", ImageId = 0, FoodStation = { Name = "Margherita Pizza", ImageId = 0 } },
+    { Name = "Sushi Express", ImageId = 0, FoodStation = { Name = "Nigiri", ImageId = 0 } },
+    { Name = "Burger Joint", ImageId = 0, FoodStation = { Name = "Cheeseburger", ImageId = 0 } },
+    { Name = "Crepe Cafe", ImageId = 0, FoodStation = { Name = "Nutella Crepes", ImageId = 0 } },
+    { Name = "Mexican Cantina", ImageId = 0, FoodStation = { Name = "Quesadillas", ImageId = 0 } },
+    { Name = "BBQ Pit", ImageId = 0, FoodStation = { Name = "Pulled Pork Sandwich", ImageId = 0 } },
+    { Name = "Fish and Chip Shop", ImageId = 0, FoodStation = { Name = "Fish and Chips", ImageId = 0 } },
+    { Name = "Bakery", ImageId = 0, FoodStation = { Name = "Croissants", ImageId = 0 } },
+    { Name = "Pasta Place", ImageId = 0, FoodStation = { Name = "Spaghetti Bolognese", ImageId = 0 } },
+    { Name = "Vegetarian Cafe", ImageId = 0, FoodStation = { Name = "Veggie Burger", ImageId = 0 } },
 }
 
 Module.BigRestaurants = {
-    { Name = "Steakhouse", ImageId = 0, FoodStations = { { Name = "Steak and Eggs", ImageId = 0 } } },
-    { Name = "French Bistro", ImageId = 0, FoodStations = { { Name = "Beef Bourguignon", ImageId = 0 } } },
-    { Name = "Italian Restaurant", ImageId = 0, FoodStations = { { Name = "Lasagna", ImageId = 0 } } },
-    { Name = "Seafood Restaurant", ImageId = 0, FoodStations = { { Name = "Grilled Salmon", ImageId = 0 } } },
-    { Name = "Sushi Bar", ImageId = 0, FoodStations = { { Name = "Sashimi Platter", ImageId = 0 } } },
-    { Name = "Mexican Grill", ImageId = 0, FoodStations = { { Name = "Fajitas", ImageId = 0 } } },
-    { Name = "Indian Cuisine", ImageId = 0, FoodStations = { { Name = "Butter Chicken", ImageId = 0 } } },
-    { Name = "Chinese Buffet", ImageId = 0, FoodStations = { { Name = "Dim Sum", ImageId = 0 } } },
-    { Name = "Brazilian Steakhouse", ImageId = 0, FoodStations = { { Name = "Churrasco", ImageId = 0 } } },
-    { Name = "Mediterranean Restaurant", ImageId = 0, FoodStations = { { Name = "Greek Salad", ImageId = 0 } } },
-    -- Additional entries
-    { Name = "Thai Palace", ImageId = 0, FoodStations = { { Name = "Pad Thai", ImageId = 0 } } },
-    { Name = "Korean BBQ", ImageId = 0, FoodStations = { { Name = "Korean BBQ", ImageId = 0 } } },
-    { Name = "German Beer Hall", ImageId = 0, FoodStations = { { Name = "Bratwurst", ImageId = 0 } } },
-    { Name = "French Gourmet", ImageId = 0, FoodStations = { { Name = "Coq au Vin", ImageId = 0 } } },
-    { Name = "Spanish Tapas", ImageId = 0, FoodStations = { { Name = "Paella", ImageId = 0 } } },
-    { Name = "Moroccan Delight", ImageId = 0, FoodStations = { { Name = "Tagine", ImageId = 0 } } },
-    { Name = "Japanese Teppanyaki", ImageId = 0, FoodStations = { { Name = "Teppanyaki Grill", ImageId = 0 } } },
-    { Name = "Lebanese Restaurant", ImageId = 0, FoodStations = { { Name = "Shawarma", ImageId = 0 } } },
-    { Name = "American Diner", ImageId = 0, FoodStations = { { Name = "Ribs and Fries", ImageId = 0 } } },
-    { Name = "Middle Eastern Grill", ImageId = 0, FoodStations = { { Name = "Falafel Platter", ImageId = 0 } } },
+    { Name = "Steakhouse", ImageId = 0, FoodStation = { Name = "Steak and Eggs", ImageId = 0, Upgrades = { "" } } },
+    { Name = "French Bistro", ImageId = 0, FoodStation = { Name = "Beef Bourguignon", ImageId = 0 } },
+    { Name = "Italian Restaurant", ImageId = 0, FoodStation = { Name = "Lasagna", ImageId = 0 } },
+    { Name = "Seafood Restaurant", ImageId = 0, FoodStation = { Name = "Grilled Salmon", ImageId = 0 } },
+    { Name = "Sushi Bar", ImageId = 0, FoodStation = { Name = "Sashimi Platter", ImageId = 0 } },
+    { Name = "Mexican Grill", ImageId = 0, FoodStation = { Name = "Fajitas", ImageId = 0 } },
+    { Name = "Indian Cuisine", ImageId = 0, FoodStation = { Name = "Butter Chicken", ImageId = 0 } },
+    { Name = "Chinese Buffet", ImageId = 0, FoodStation = { Name = "Dim Sum", ImageId = 0 } },
+    { Name = "Brazilian Steakhouse", ImageId = 0, FoodStation = { Name = "Churrasco", ImageId = 0 } },
+    { Name = "Mediterranean Restaurant", ImageId = 0, FoodStation = { Name = "Greek Salad", ImageId = 0 } },
+    { Name = "Thai Palace", ImageId = 0, FoodStation = { Name = "Pad Thai", ImageId = 0 } },
+    { Name = "Korean BBQ", ImageId = 0, FoodStation = { Name = "Korean BBQ", ImageId = 0 } },
+    { Name = "German Beer Hall", ImageId = 0, FoodStation = { Name = "Bratwurst", ImageId = 0 } },
+    { Name = "French Gourmet", ImageId = 0, FoodStation = { Name = "Coq au Vin", ImageId = 0 } },
+    { Name = "Spanish Tapas", ImageId = 0, FoodStation = { Name = "Paella", ImageId = 0 } },
+    { Name = "Moroccan Delight", ImageId = 0, FoodStation = { Name = "Tagine", ImageId = 0 } },
+    { Name = "Japanese Teppanyaki", ImageId = 0, FoodStation = { Name = "Teppanyaki Grill", ImageId = 0 } },
+    { Name = "Lebanese Restaurant", ImageId = 0, FoodStation = { Name = "Shawarma", ImageId = 0 } },
+    { Name = "American Diner", ImageId = 0, FoodStation = { Name = "Ribs and Fries", ImageId = 0 } },
+    { Name = "Middle Eastern Grill", ImageId = 0, FoodStation = { Name = "Falafel Platter", ImageId = 0 } },
 }
 
 ----------------- Private Functions -----------------
@@ -450,16 +445,15 @@ function Module.GetCityStations(cityNumber)
             local function getStationsFromCategory(categoryList, ownStationName)
                 local stationList = {}
                 for _, r in ipairs(categoryList) do
-                    for _, fs in ipairs(r.FoodStations) do
-                        if fs.Name ~= ownStationName and not usedStationNames[fs.Name] then
-                            table.insert(stationList, fs)
-                        end
+                    local fs = r.FoodStation
+                    if fs.Name ~= ownStationName and not usedStationNames[fs.Name] then
+                        table.insert(stationList, fs)
                     end
                 end
                 return stationList
             end
 
-            local ownStation = restaurantData.FoodStations[1]
+            local ownStation = restaurantData.FoodStation
             local ownStationName = ownStation.Name
             usedStationNames[ownStationName] = true -- Own station is already used
 
